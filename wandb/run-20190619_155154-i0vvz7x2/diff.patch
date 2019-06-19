@@ -1,0 +1,1855 @@
+diff --git a/.ipynb_checkpoints/recos-checkpoint.ipynb b/.ipynb_checkpoints/recos-checkpoint.ipynb
+index 368449e..032db68 100644
+--- a/.ipynb_checkpoints/recos-checkpoint.ipynb
++++ b/.ipynb_checkpoints/recos-checkpoint.ipynb
+@@ -9,12 +9,14 @@
+      "name": "stderr",
+      "output_type": "stream",
+      "text": [
+-      "//anaconda/envs/py3l/lib/python3.6/site-packages/matplotlib/__init__.py:855: MatplotlibDeprecationWarning: \n",
++      "/opt/conda/lib/python3.7/site-packages/matplotlib/__init__.py:855: MatplotlibDeprecationWarning: \n",
+       "examples.directory is deprecated; in the future, examples will be found relative to the 'datapath' directory.\n",
+       "  \"found relative to the 'datapath' directory.\".format(key))\n",
+-      "//anaconda/envs/py3l/lib/python3.6/site-packages/matplotlib/__init__.py:846: MatplotlibDeprecationWarning: \n",
++      "/opt/conda/lib/python3.7/site-packages/matplotlib/__init__.py:846: MatplotlibDeprecationWarning: \n",
+       "The text.latex.unicode rcparam was deprecated in Matplotlib 2.2 and will be removed in 3.1.\n",
+-      "  \"2.2\", name=key, obj_type=\"rcparam\", addendum=addendum)\n"
++      "  \"2.2\", name=key, obj_type=\"rcparam\", addendum=addendum)\n",
++      "/opt/conda/lib/python3.7/site-packages/seaborn/apionly.py:9: UserWarning: As seaborn no longer sets a default style on import, the seaborn.apionly module is deprecated. It will be removed in a future version.\n",
++      "  warnings.warn(msg, UserWarning)\n"
+      ]
+     }
+    ],
+@@ -31,7 +33,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 21,
++   "execution_count": 3,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -110,19 +112,19 @@
+        "4       1       50     3.5  1112484580"
+       ]
+      },
+-     "execution_count": 21,
++     "execution_count": 3,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+    ],
+    "source": [
+-    "df = pd.read_csv(\"data/ratings.csv.gz\", compression='gzip')\n",
++    "df = pd.read_csv(\"ratings.csv.gz\", compression='gzip')\n",
+     "df.head()"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 22,
++   "execution_count": 4,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -195,7 +197,7 @@
+        "4       1       50     3.5"
+       ]
+      },
+-     "execution_count": 22,
++     "execution_count": 4,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -207,7 +209,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 23,
++   "execution_count": 5,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -216,7 +218,7 @@
+        "Index(['userId', 'movieId', 'rating'], dtype='object')"
+       ]
+      },
+-     "execution_count": 23,
++     "execution_count": 5,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -227,7 +229,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 24,
++   "execution_count": 6,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -236,7 +238,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 25,
++   "execution_count": 7,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -246,7 +248,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 26,
++   "execution_count": 8,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -255,7 +257,7 @@
+        "50000"
+       ]
+      },
+-     "execution_count": 26,
++     "execution_count": 8,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -267,16 +269,16 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 27,
++   "execution_count": 9,
+    "metadata": {},
+    "outputs": [
+     {
+      "data": {
+       "text/plain": [
+-       "(33243, 6594)"
++       "(33380, 6695)"
+       ]
+      },
+-     "execution_count": 27,
++     "execution_count": 9,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -289,7 +291,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 28,
++   "execution_count": 10,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -320,34 +322,34 @@
+        "  </thead>\n",
+        "  <tbody>\n",
+        "    <tr>\n",
+-       "      <th>2703571</th>\n",
+-       "      <td>4539</td>\n",
+-       "      <td>1492</td>\n",
+-       "      <td>2.5</td>\n",
++       "      <th>16724527</th>\n",
++       "      <td>27904</td>\n",
++       "      <td>941</td>\n",
++       "      <td>3.0</td>\n",
+        "    </tr>\n",
+        "    <tr>\n",
+-       "      <th>12887545</th>\n",
+-       "      <td>21449</td>\n",
+-       "      <td>1147</td>\n",
+-       "      <td>4.0</td>\n",
++       "      <th>6211895</th>\n",
++       "      <td>10252</td>\n",
++       "      <td>395</td>\n",
++       "      <td>2.5</td>\n",
+        "    </tr>\n",
+        "    <tr>\n",
+-       "      <th>16996832</th>\n",
+-       "      <td>28335</td>\n",
+-       "      <td>823</td>\n",
+-       "      <td>3.0</td>\n",
++       "      <th>18570244</th>\n",
++       "      <td>31047</td>\n",
++       "      <td>6415</td>\n",
++       "      <td>4.0</td>\n",
+        "    </tr>\n",
+        "    <tr>\n",
+-       "      <th>905459</th>\n",
+-       "      <td>1545</td>\n",
+-       "      <td>775</td>\n",
+-       "      <td>4.5</td>\n",
++       "      <th>44365</th>\n",
++       "      <td>74</td>\n",
++       "      <td>3378</td>\n",
++       "      <td>2.0</td>\n",
+        "    </tr>\n",
+        "    <tr>\n",
+-       "      <th>845713</th>\n",
+-       "      <td>1439</td>\n",
+-       "      <td>178</td>\n",
+-       "      <td>3.0</td>\n",
++       "      <th>18513152</th>\n",
++       "      <td>30961</td>\n",
++       "      <td>788</td>\n",
++       "      <td>2.5</td>\n",
+        "    </tr>\n",
+        "  </tbody>\n",
+        "</table>\n",
+@@ -355,14 +357,14 @@
+       ],
+       "text/plain": [
+        "          userId  movieId  rating\n",
+-       "2703571     4539     1492     2.5\n",
+-       "12887545   21449     1147     4.0\n",
+-       "16996832   28335      823     3.0\n",
+-       "905459      1545      775     4.5\n",
+-       "845713      1439      178     3.0"
++       "16724527   27904      941     3.0\n",
++       "6211895    10252      395     2.5\n",
++       "18570244   31047     6415     4.0\n",
++       "44365         74     3378     2.0\n",
++       "18513152   30961      788     2.5"
+       ]
+      },
+-     "execution_count": 28,
++     "execution_count": 10,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -373,7 +375,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 29,
++   "execution_count": 11,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -383,7 +385,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 30,
++   "execution_count": 12,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -393,18 +395,38 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 36,
++   "execution_count": 30,
+    "metadata": {},
+-   "outputs": [],
++   "outputs": [
++    {
++     "ename": "ValueError",
++     "evalue": "Layer model_2 expects 2 inputs, but it received 1 input tensors. Input received: [<tf.Tensor 'model_2_input:0' shape=(?, 1) dtype=float32>]",
++     "output_type": "error",
++     "traceback": [
++      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
++      "\u001b[0;31mValueError\u001b[0m                                Traceback (most recent call last)",
++      "\u001b[0;32m<ipython-input-30-c2fbddb45983>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[1;32m     10\u001b[0m \u001b[0mprod\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mkeras\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mlayers\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mDot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0maxes\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mname\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m\"MatrixFactorization\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mmovie_vec\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0muser_vec\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     11\u001b[0m \u001b[0mmodel\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mkeras\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmodels\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mSequential\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 12\u001b[0;31m \u001b[0mmodel\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0madd\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mkeras\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mModel\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0muser_input\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmovie_input\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mprod\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     13\u001b[0m \u001b[0mmodel\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0madd\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mDropout\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m0.5\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     14\u001b[0m \u001b[0mmodel\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mcompile\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'adam'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'mse'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
++      "\u001b[0;32m/opt/conda/lib/python3.7/site-packages/keras/engine/sequential.py\u001b[0m in \u001b[0;36madd\u001b[0;34m(self, layer)\u001b[0m\n\u001b[1;32m    163\u001b[0m                     \u001b[0;31m# and create the node connecting the current layer\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    164\u001b[0m                     \u001b[0;31m# to the input layer we just created.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 165\u001b[0;31m                     \u001b[0mlayer\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mx\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    166\u001b[0m                     \u001b[0mset_inputs\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;32mTrue\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    167\u001b[0m             \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
++      "\u001b[0;32m/opt/conda/lib/python3.7/site-packages/keras/engine/base_layer.py\u001b[0m in \u001b[0;36m__call__\u001b[0;34m(self, inputs, **kwargs)\u001b[0m\n\u001b[1;32m    438\u001b[0m             \u001b[0;31m# Raise exceptions in case the input is not compatible\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    439\u001b[0m             \u001b[0;31m# with the input_spec set at build time.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 440\u001b[0;31m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0massert_input_compatibility\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0minputs\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    441\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    442\u001b[0m             \u001b[0;31m# Handle mask propagation.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
++      "\u001b[0;32m/opt/conda/lib/python3.7/site-packages/keras/engine/base_layer.py\u001b[0m in \u001b[0;36massert_input_compatibility\u001b[0;34m(self, inputs)\u001b[0m\n\u001b[1;32m    297\u001b[0m                              \u001b[0;34m'but it received '\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0mstr\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mlen\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0minputs\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m \u001b[0;34m+\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    298\u001b[0m                              \u001b[0;34m' input tensors. Input received: '\u001b[0m \u001b[0;34m+\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 299\u001b[0;31m                              str(inputs))\n\u001b[0m\u001b[1;32m    300\u001b[0m         \u001b[0;32mfor\u001b[0m \u001b[0minput_index\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0mx\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mspec\u001b[0m\u001b[0;34m)\u001b[0m \u001b[0;32min\u001b[0m \u001b[0menumerate\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mzip\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0minputs\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0minput_spec\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    301\u001b[0m             \u001b[0;32mif\u001b[0m \u001b[0mspec\u001b[0m \u001b[0;32mis\u001b[0m \u001b[0;32mNone\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
++      "\u001b[0;31mValueError\u001b[0m: Layer model_2 expects 2 inputs, but it received 1 input tensors. Input received: [<tf.Tensor 'model_2_input:0' shape=(?, 1) dtype=float32>]"
++     ]
++    }
++   ],
+    "source": [
+     "import keras\n",
++    "from keras.models import Sequential\n",
++    "from keras.layers import Activation, Dropout, Flatten, Dense\n",
++    "\n",
+     "movie_input = keras.layers.Input(shape=[1],name='movieId')\n",
+     "movie_embedding = keras.layers.Embedding(n_movies + 1, n_factors, name='movieEmbedding')(movie_input)\n",
+-    "movie_vec = keras.layers.Flatten(name='movieFlatten')(movie_embedding)\n",
++    "movie_embedding_droput = keras.layers.Dropout(0.2)(movie_embedding) \n",
++    "movie_vec = keras.layers.Flatten(name='movieFlatten')(movie_embedding_droput)\n",
+     "\n",
+     "user_input = keras.layers.Input(shape=[1],name='userId')\n",
+     "user_embedding = keras.layers.Embedding(n_users + 1, n_factors,name='userEmbedding')(user_input)\n",
+-    "user_vec = keras.layers.Flatten(name='userFlatten')(user_embedding)\n",
++    "user_embedding_dropout = keras.layers.Dropout(0.2)(user_embedding)\n",
++    "user_vec = keras.layers.Flatten(name='userFlatten')(user_embedding_dropout)\n",
+     "\n",
+     "prod = keras.layers.Dot(axes=1, name=\"MatrixFactorization\")([movie_vec, user_vec] )\n",
+     "model = keras.Model([user_input, movie_input], prod)\n",
+@@ -413,7 +435,27 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 37,
++   "execution_count": 20,
++   "metadata": {},
++   "outputs": [
++    {
++     "data": {
++      "text/plain": [
++       "<tf.Tensor 'movieId:0' shape=(?, 1) dtype=float32>"
++      ]
++     },
++     "execution_count": 20,
++     "metadata": {},
++     "output_type": "execute_result"
++    }
++   ],
++   "source": [
++    "movie_input"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 21,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -427,9 +469,9 @@
+       "__________________________________________________________________________________________________\n",
+       "userId (InputLayer)             (None, 1)            0                                            \n",
+       "__________________________________________________________________________________________________\n",
+-      "movieEmbedding (Embedding)      (None, 1, 3)         19785       movieId[0][0]                    \n",
++      "movieEmbedding (Embedding)      (None, 1, 3)         20088       movieId[0][0]                    \n",
+       "__________________________________________________________________________________________________\n",
+-      "userEmbedding (Embedding)       (None, 1, 3)         99732       userId[0][0]                     \n",
++      "userEmbedding (Embedding)       (None, 1, 3)         100143      userId[0][0]                     \n",
+       "__________________________________________________________________________________________________\n",
+       "movieFlatten (Flatten)          (None, 3)            0           movieEmbedding[0][0]             \n",
+       "__________________________________________________________________________________________________\n",
+@@ -438,8 +480,8 @@
+       "MatrixFactorization (Dot)       (None, 1)            0           movieFlatten[0][0]               \n",
+       "                                                                 userFlatten[0][0]                \n",
+       "==================================================================================================\n",
+-      "Total params: 119,517\n",
+-      "Trainable params: 119,517\n",
++      "Total params: 120,231\n",
++      "Trainable params: 120,231\n",
+       "Non-trainable params: 0\n",
+       "__________________________________________________________________________________________________\n"
+      ]
+@@ -451,167 +493,27 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 45,
++   "execution_count": 24,
+    "metadata": {},
+-   "outputs": [
+-    {
+-     "data": {
+-      "image/svg+xml": [
+-       "<svg height=\"296pt\" viewBox=\"0.00 0.00 667.96 296.00\" width=\"668pt\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n",
+-       "<g class=\"graph\" id=\"graph0\" transform=\"scale(1 1) rotate(0) translate(4 292)\">\n",
+-       "<title>G</title>\n",
+-       "<polygon fill=\"white\" points=\"-4,4 -4,-292 663.956,-292 663.956,4 -4,4\" stroke=\"none\"/>\n",
+-       "<!-- 111995810536 -->\n",
+-       "<g class=\"node\" id=\"node1\"><title>111995810536</title>\n",
+-       "<polygon fill=\"none\" points=\"34.6172,-243.5 34.6172,-287.5 292.173,-287.5 292.173,-243.5 34.6172,-243.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"100.736\" y=\"-261.3\">movieId: InputLayer</text>\n",
+-       "<polyline fill=\"none\" points=\"166.855,-243.5 166.855,-287.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"194.69\" y=\"-272.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"166.855,-265.5 222.524,-265.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"194.69\" y=\"-250.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"222.524,-243.5 222.524,-287.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"257.349\" y=\"-272.3\">(None, 1)</text>\n",
+-       "<polyline fill=\"none\" points=\"222.524,-265.5 292.173,-265.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"257.349\" y=\"-250.3\">(None, 1)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810704 -->\n",
+-       "<g class=\"node\" id=\"node3\"><title>111995810704</title>\n",
+-       "<polygon fill=\"none\" points=\"0,-162.5 0,-206.5 326.79,-206.5 326.79,-162.5 0,-162.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"93.7363\" y=\"-180.3\">movieEmbedding: Embedding</text>\n",
+-       "<polyline fill=\"none\" points=\"187.473,-162.5 187.473,-206.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"215.307\" y=\"-191.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"187.473,-184.5 243.142,-184.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"215.307\" y=\"-169.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"243.142,-162.5 243.142,-206.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"284.966\" y=\"-191.3\">(None, 1)</text>\n",
+-       "<polyline fill=\"none\" points=\"243.142,-184.5 326.79,-184.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"284.966\" y=\"-169.3\">(None, 1, 3)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810536&#45;&gt;111995810704 -->\n",
+-       "<g class=\"edge\" id=\"edge1\"><title>111995810536-&gt;111995810704</title>\n",
+-       "<path d=\"M163.395,-243.329C163.395,-235.183 163.395,-225.699 163.395,-216.797\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"166.895,-216.729 163.395,-206.729 159.895,-216.729 166.895,-216.729\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "<!-- 111995810760 -->\n",
+-       "<g class=\"node\" id=\"node2\"><title>111995810760</title>\n",
+-       "<polygon fill=\"none\" points=\"379.452,-243.5 379.452,-287.5 625.338,-287.5 625.338,-243.5 379.452,-243.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"439.736\" y=\"-261.3\">userId: InputLayer</text>\n",
+-       "<polyline fill=\"none\" points=\"500.021,-243.5 500.021,-287.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"527.855\" y=\"-272.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"500.021,-265.5 555.69,-265.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"527.855\" y=\"-250.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"555.69,-243.5 555.69,-287.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"590.514\" y=\"-272.3\">(None, 1)</text>\n",
+-       "<polyline fill=\"none\" points=\"555.69,-265.5 625.338,-265.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"590.514\" y=\"-250.3\">(None, 1)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810872 -->\n",
+-       "<g class=\"node\" id=\"node4\"><title>111995810872</title>\n",
+-       "<polygon fill=\"none\" points=\"344.834,-162.5 344.834,-206.5 659.956,-206.5 659.956,-162.5 344.834,-162.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"432.736\" y=\"-180.3\">userEmbedding: Embedding</text>\n",
+-       "<polyline fill=\"none\" points=\"520.638,-162.5 520.638,-206.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"548.473\" y=\"-191.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"520.638,-184.5 576.307,-184.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"548.473\" y=\"-169.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"576.307,-162.5 576.307,-206.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"618.131\" y=\"-191.3\">(None, 1)</text>\n",
+-       "<polyline fill=\"none\" points=\"576.307,-184.5 659.956,-184.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"618.131\" y=\"-169.3\">(None, 1, 3)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810760&#45;&gt;111995810872 -->\n",
+-       "<g class=\"edge\" id=\"edge2\"><title>111995810760-&gt;111995810872</title>\n",
+-       "<path d=\"M502.395,-243.329C502.395,-235.183 502.395,-225.699 502.395,-216.797\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"505.895,-216.729 502.395,-206.729 498.895,-216.729 505.895,-216.729\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "<!-- 111995810816 -->\n",
+-       "<g class=\"node\" id=\"node5\"><title>111995810816</title>\n",
+-       "<polygon fill=\"none\" points=\"50.6621,-81.5 50.6621,-125.5 326.128,-125.5 326.128,-81.5 50.6621,-81.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"118.736\" y=\"-99.3\">movieFlatten: Flatten</text>\n",
+-       "<polyline fill=\"none\" points=\"186.811,-81.5 186.811,-125.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"214.645\" y=\"-110.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"186.811,-103.5 242.479,-103.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"214.645\" y=\"-88.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"242.479,-81.5 242.479,-125.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"284.304\" y=\"-110.3\">(None, 1, 3)</text>\n",
+-       "<polyline fill=\"none\" points=\"242.479,-103.5 326.128,-103.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"284.304\" y=\"-88.3\">(None, 3)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810704&#45;&gt;111995810816 -->\n",
+-       "<g class=\"edge\" id=\"edge3\"><title>111995810704-&gt;111995810816</title>\n",
+-       "<path d=\"M170.095,-162.329C172.701,-154.094 175.739,-144.493 178.583,-135.507\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"181.997,-136.319 181.677,-125.729 175.323,-134.207 181.997,-136.319\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "<!-- 111995811040 -->\n",
+-       "<g class=\"node\" id=\"node6\"><title>111995811040</title>\n",
+-       "<polygon fill=\"none\" points=\"357.497,-81.5 357.497,-125.5 621.293,-125.5 621.293,-81.5 357.497,-81.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"419.736\" y=\"-99.3\">userFlatten: Flatten</text>\n",
+-       "<polyline fill=\"none\" points=\"481.976,-81.5 481.976,-125.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"509.811\" y=\"-110.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"481.976,-103.5 537.645,-103.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"509.811\" y=\"-88.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"537.645,-81.5 537.645,-125.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"579.469\" y=\"-110.3\">(None, 1, 3)</text>\n",
+-       "<polyline fill=\"none\" points=\"537.645,-103.5 621.293,-103.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"579.469\" y=\"-88.3\">(None, 3)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810872&#45;&gt;111995811040 -->\n",
+-       "<g class=\"edge\" id=\"edge4\"><title>111995810872-&gt;111995811040</title>\n",
+-       "<path d=\"M498.911,-162.329C497.571,-154.183 496.01,-144.699 494.545,-135.797\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"497.966,-135.028 492.888,-125.729 491.059,-136.165 497.966,-135.028\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "<!-- 111995811152 -->\n",
+-       "<g class=\"node\" id=\"node7\"><title>111995811152</title>\n",
+-       "<polygon fill=\"none\" points=\"162.572,-0.5 162.572,-44.5 514.218,-44.5 514.218,-0.5 162.572,-0.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"240.75\" y=\"-18.3\">MatrixFactorization: Dot</text>\n",
+-       "<polyline fill=\"none\" points=\"318.928,-0.5 318.928,-44.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"346.762\" y=\"-29.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"318.928,-22.5 374.597,-22.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"346.762\" y=\"-7.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"374.597,-0.5 374.597,-44.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"444.407\" y=\"-29.3\">[(None, 3), (None, 3)]</text>\n",
+-       "<polyline fill=\"none\" points=\"374.597,-22.5 514.218,-22.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"443.921\" y=\"-7.3\">(None, 1)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810816&#45;&gt;111995811152 -->\n",
+-       "<g class=\"edge\" id=\"edge5\"><title>111995810816-&gt;111995811152</title>\n",
+-       "<path d=\"M228.592,-81.3294C247.246,-71.5049 269.591,-59.7366 289.24,-49.3883\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"291.13,-52.3486 298.347,-44.5919 287.868,-46.1551 291.13,-52.3486\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "<!-- 111995811040&#45;&gt;111995811152 -->\n",
+-       "<g class=\"edge\" id=\"edge6\"><title>111995811040-&gt;111995811152</title>\n",
+-       "<path d=\"M448.93,-81.3294C430.066,-71.4605 407.454,-59.63 387.609,-49.2479\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"389.193,-46.1264 378.71,-44.5919 385.948,-52.3288 389.193,-46.1264\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "</g>\n",
+-       "</svg>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.SVG object>"
+-      ]
+-     },
+-     "execution_count": 45,
+-     "metadata": {},
+-     "output_type": "execute_result"
+-    }
+-   ],
++   "outputs": [],
+    "source": [
+     "from keras.utils.vis_utils import model_to_dot\n",
+     "from IPython.display import SVG\n",
+-    "SVG(model_to_dot(model,  show_shapes=True, show_layer_names=True, rankdir='HB').create(prog='dot', format='svg'))"
++    "# SVG(model_to_dot(model,  show_shapes=True, show_layer_names=True, rankdir='HB').create(prog='dot', format='svg'))"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 39,
++   "execution_count": 25,
+    "metadata": {},
+    "outputs": [
+     {
+      "data": {
+       "text/plain": [
+-       "array([ 4539, 21449, 28335, ..., 26948,  1766, 31200], dtype=int32)"
++       "array([10252,    74, 28423, ..., 18312,  2874,  1637], dtype=int32)"
+       ]
+      },
+-     "execution_count": 39,
++     "execution_count": 25,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -622,213 +524,216 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 40,
++   "execution_count": 26,
+    "metadata": {},
+    "outputs": [
+     {
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
++      "WARNING:tensorflow:From /opt/conda/lib/python3.7/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.\n",
++      "Instructions for updating:\n",
++      "Use tf.cast instead.\n",
+       "Epoch 1/100\n",
+-      "40102/40102 [==============================] - 10s 240us/step - loss: 13.5493\n",
++      "39912/39912 [==============================] - 21s 519us/step - loss: 13.5005\n",
+       "Epoch 2/100\n",
+-      "40102/40102 [==============================] - 9s 227us/step - loss: 13.5154\n",
++      "39912/39912 [==============================] - 5s 134us/step - loss: 13.4678\n",
+       "Epoch 3/100\n",
+-      "40102/40102 [==============================] - 9s 237us/step - loss: 13.3653\n",
++      "39912/39912 [==============================] - 5s 130us/step - loss: 13.3227\n",
+       "Epoch 4/100\n",
+-      "40102/40102 [==============================] - 10s 250us/step - loss: 13.0370\n",
++      "39912/39912 [==============================] - 5s 128us/step - loss: 13.0030\n",
+       "Epoch 5/100\n",
+-      "40102/40102 [==============================] - 10s 243us/step - loss: 12.5399\n",
++      "39912/39912 [==============================] - 5s 122us/step - loss: 12.5169\n",
+       "Epoch 6/100\n",
+-      "40102/40102 [==============================] - 10s 246us/step - loss: 11.9038\n",
++      "39912/39912 [==============================] - 5s 128us/step - loss: 11.8922\n",
+       "Epoch 7/100\n",
+-      "40102/40102 [==============================] - 12s 289us/step - loss: 11.1570\n",
++      "39912/39912 [==============================] - 5s 129us/step - loss: 11.1582\n",
+       "Epoch 8/100\n",
+-      "40102/40102 [==============================] - 10s 240us/step - loss: 10.3298\n",
++      "39912/39912 [==============================] - 5s 129us/step - loss: 10.3437\n",
+       "Epoch 9/100\n",
+-      "40102/40102 [==============================] - 9s 225us/step - loss: 9.4517\n",
++      "39912/39912 [==============================] - 5s 128us/step - loss: 9.4778\n",
+       "Epoch 10/100\n",
+-      "40102/40102 [==============================] - 9s 223us/step - loss: 8.5550\n",
++      "39912/39912 [==============================] - 5s 130us/step - loss: 8.5907\n",
+       "Epoch 11/100\n",
+-      "40102/40102 [==============================] - 11s 264us/step - loss: 7.6719\n",
++      "39912/39912 [==============================] - 5s 130us/step - loss: 7.7138\n",
+       "Epoch 12/100\n",
+-      "40102/40102 [==============================] - 11s 264us/step - loss: 6.8300\n",
++      "39912/39912 [==============================] - 5s 123us/step - loss: 6.8738\n",
+       "Epoch 13/100\n",
+-      "40102/40102 [==============================] - 10s 245us/step - loss: 6.0531\n",
++      "39912/39912 [==============================] - 5s 130us/step - loss: 6.0947\n",
+       "Epoch 14/100\n",
+-      "40102/40102 [==============================] - 11s 264us/step - loss: 5.3547\n",
++      "39912/39912 [==============================] - 5s 136us/step - loss: 5.3912\n",
+       "Epoch 15/100\n",
+-      "40102/40102 [==============================] - 11s 263us/step - loss: 4.7401\n",
++      "39912/39912 [==============================] - 5s 136us/step - loss: 4.7685\n",
+       "Epoch 16/100\n",
+-      "40102/40102 [==============================] - 11s 266us/step - loss: 4.2061\n",
++      "39912/39912 [==============================] - 5s 126us/step - loss: 4.2256\n",
+       "Epoch 17/100\n",
+-      "40102/40102 [==============================] - 11s 264us/step - loss: 3.7450\n",
++      "39912/39912 [==============================] - 7s 166us/step - loss: 3.7557\n",
+       "Epoch 18/100\n",
+-      "40102/40102 [==============================] - 10s 254us/step - loss: 3.3484\n",
++      "39912/39912 [==============================] - 5s 118us/step - loss: 3.3505\n",
+       "Epoch 19/100\n",
+-      "40102/40102 [==============================] - 11s 264us/step - loss: 3.0063\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 3.0006\n",
+       "Epoch 20/100\n",
+-      "40102/40102 [==============================] - 11s 268us/step - loss: 2.7107\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 2.6997\n",
+       "Epoch 21/100\n",
+-      "40102/40102 [==============================] - 11s 268us/step - loss: 2.4542\n",
++      "39912/39912 [==============================] - 5s 115us/step - loss: 2.4388\n",
+       "Epoch 22/100\n",
+-      "40102/40102 [==============================] - 11s 283us/step - loss: 2.2311\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 2.2122\n",
+       "Epoch 23/100\n",
+-      "40102/40102 [==============================] - 12s 288us/step - loss: 2.0362\n",
++      "39912/39912 [==============================] - 5s 115us/step - loss: 2.0140\n",
+       "Epoch 24/100\n",
+-      "40102/40102 [==============================] - 10s 253us/step - loss: 1.8644\n",
++      "39912/39912 [==============================] - 5s 115us/step - loss: 1.8411\n",
+       "Epoch 25/100\n",
+-      "40102/40102 [==============================] - 11s 275us/step - loss: 1.7142\n",
++      "39912/39912 [==============================] - 5s 119us/step - loss: 1.6885\n",
+       "Epoch 26/100\n",
+-      "40102/40102 [==============================] - 15s 385us/step - loss: 1.5807\n",
++      "39912/39912 [==============================] - 5s 118us/step - loss: 1.5539\n",
+       "Epoch 27/100\n",
+-      "40102/40102 [==============================] - 13s 314us/step - loss: 1.4629\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 1.4349\n",
+       "Epoch 28/100\n",
+-      "40102/40102 [==============================] - 12s 301us/step - loss: 1.3578\n",
++      "39912/39912 [==============================] - 5s 119us/step - loss: 1.3294\n",
+       "Epoch 29/100\n",
+-      "40102/40102 [==============================] - 12s 302us/step - loss: 1.2640\n",
++      "39912/39912 [==============================] - 5s 123us/step - loss: 1.2353\n",
+       "Epoch 30/100\n",
+-      "40102/40102 [==============================] - 11s 283us/step - loss: 1.1801\n",
++      "39912/39912 [==============================] - 7s 164us/step - loss: 1.1511\n",
+       "Epoch 31/100\n",
+-      "40102/40102 [==============================] - 11s 281us/step - loss: 1.1048\n",
++      "39912/39912 [==============================] - 5s 120us/step - loss: 1.0759\n",
+       "Epoch 32/100\n",
+-      "40102/40102 [==============================] - 11s 273us/step - loss: 1.0371\n",
++      "39912/39912 [==============================] - 5s 126us/step - loss: 1.0082\n",
+       "Epoch 33/100\n",
+-      "40102/40102 [==============================] - 11s 278us/step - loss: 0.9767\n",
++      "39912/39912 [==============================] - 5s 119us/step - loss: 0.9471\n",
+       "Epoch 34/100\n",
+-      "40102/40102 [==============================] - 11s 273us/step - loss: 0.9211\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 0.8921\n",
+       "Epoch 35/100\n",
+-      "40102/40102 [==============================] - 12s 288us/step - loss: 0.8711\n",
++      "39912/39912 [==============================] - 5s 121us/step - loss: 0.8423\n",
+       "Epoch 36/100\n",
+-      "40102/40102 [==============================] - 11s 266us/step - loss: 0.8256\n",
++      "39912/39912 [==============================] - 5s 119us/step - loss: 0.7969\n",
+       "Epoch 37/100\n",
+-      "40102/40102 [==============================] - 11s 273us/step - loss: 0.7842\n",
++      "39912/39912 [==============================] - 7s 173us/step - loss: 0.7560\n",
+       "Epoch 38/100\n",
+-      "40102/40102 [==============================] - 11s 284us/step - loss: 0.7463\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 0.7182\n",
+       "Epoch 39/100\n",
+-      "40102/40102 [==============================] - 14s 358us/step - loss: 0.7114\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 0.6840\n",
+       "Epoch 40/100\n",
+-      "40102/40102 [==============================] - 17s 436us/step - loss: 0.6796\n",
++      "39912/39912 [==============================] - 5s 118us/step - loss: 0.6526\n",
+       "Epoch 41/100\n",
+-      "40102/40102 [==============================] - 18s 447us/step - loss: 0.6502\n",
++      "39912/39912 [==============================] - 5s 120us/step - loss: 0.6234\n",
+       "Epoch 42/100\n",
+-      "40102/40102 [==============================] - 16s 396us/step - loss: 0.6230\n",
++      "39912/39912 [==============================] - 5s 124us/step - loss: 0.5964\n",
+       "Epoch 43/100\n",
+-      "40102/40102 [==============================] - 17s 419us/step - loss: 0.5979\n",
++      "39912/39912 [==============================] - 5s 119us/step - loss: 0.5718\n",
+       "Epoch 44/100\n",
+-      "40102/40102 [==============================] - 15s 381us/step - loss: 0.5746\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 0.5485\n",
+       "Epoch 45/100\n",
+-      "40102/40102 [==============================] - 16s 392us/step - loss: 0.5530\n",
++      "39912/39912 [==============================] - 5s 120us/step - loss: 0.5273\n",
+       "Epoch 46/100\n",
+-      "40102/40102 [==============================] - 17s 418us/step - loss: 0.5326\n",
++      "39912/39912 [==============================] - 5s 122us/step - loss: 0.5070\n",
+       "Epoch 47/100\n",
+-      "40102/40102 [==============================] - 16s 396us/step - loss: 0.5135\n",
++      "39912/39912 [==============================] - 5s 123us/step - loss: 0.4880\n",
+       "Epoch 48/100\n",
+-      "40102/40102 [==============================] - 14s 358us/step - loss: 0.4954\n",
++      "39912/39912 [==============================] - 5s 123us/step - loss: 0.4704\n",
+       "Epoch 49/100\n",
+-      "40102/40102 [==============================] - 14s 356us/step - loss: 0.4783\n",
++      "39912/39912 [==============================] - 5s 122us/step - loss: 0.4535\n",
+       "Epoch 50/100\n",
+-      "40102/40102 [==============================] - 18s 439us/step - loss: 0.4618\n",
++      "39912/39912 [==============================] - 5s 122us/step - loss: 0.4373\n",
+       "Epoch 51/100\n",
+-      "40102/40102 [==============================] - 12s 309us/step - loss: 0.4460\n",
++      "39912/39912 [==============================] - 5s 121us/step - loss: 0.4220\n",
+       "Epoch 52/100\n",
+-      "40102/40102 [==============================] - 11s 271us/step - loss: 0.4308\n",
++      "39912/39912 [==============================] - 5s 123us/step - loss: 0.4073\n",
+       "Epoch 53/100\n",
+-      "40102/40102 [==============================] - 12s 310us/step - loss: 0.4163\n",
++      "39912/39912 [==============================] - 10s 243us/step - loss: 0.3931\n",
+       "Epoch 54/100\n",
+-      "40102/40102 [==============================] - 13s 319us/step - loss: 0.4022\n",
++      "39912/39912 [==============================] - 9s 237us/step - loss: 0.3795\n",
+       "Epoch 55/100\n",
+-      "40102/40102 [==============================] - 13s 324us/step - loss: 0.3885\n",
++      "39912/39912 [==============================] - 9s 229us/step - loss: 0.3662\n",
+       "Epoch 56/100\n",
+-      "40102/40102 [==============================] - 14s 342us/step - loss: 0.3752\n",
++      "39912/39912 [==============================] - 8s 199us/step - loss: 0.3536\n",
+       "Epoch 57/100\n",
+-      "40102/40102 [==============================] - 15s 379us/step - loss: 0.3625\n",
++      "39912/39912 [==============================] - 5s 120us/step - loss: 0.3415\n",
+       "Epoch 58/100\n",
+-      "40102/40102 [==============================] - 15s 377us/step - loss: 0.3501\n",
++      "39912/39912 [==============================] - 5s 115us/step - loss: 0.3296\n",
+       "Epoch 59/100\n",
+-      "40102/40102 [==============================] - 15s 368us/step - loss: 0.3381\n",
++      "39912/39912 [==============================] - 5s 122us/step - loss: 0.3181\n",
+       "Epoch 60/100\n",
+-      "40102/40102 [==============================] - 15s 371us/step - loss: 0.3264\n",
++      "39912/39912 [==============================] - 5s 123us/step - loss: 0.3071\n",
+       "Epoch 61/100\n",
+-      "40102/40102 [==============================] - 15s 366us/step - loss: 0.3152\n",
++      "39912/39912 [==============================] - 5s 120us/step - loss: 0.2964\n",
+       "Epoch 62/100\n",
+-      "40102/40102 [==============================] - 14s 355us/step - loss: 0.3044\n",
++      "39912/39912 [==============================] - 5s 120us/step - loss: 0.2862\n",
+       "Epoch 63/100\n",
+-      "40102/40102 [==============================] - 13s 321us/step - loss: 0.2937\n",
++      "39912/39912 [==============================] - 5s 123us/step - loss: 0.2759\n",
+       "Epoch 64/100\n",
+-      "40102/40102 [==============================] - 12s 308us/step - loss: 0.2833\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 0.2662\n",
+       "Epoch 65/100\n",
+-      "40102/40102 [==============================] - 13s 312us/step - loss: 0.2735\n",
++      "39912/39912 [==============================] - 5s 119us/step - loss: 0.2569\n",
+       "Epoch 66/100\n",
+-      "40102/40102 [==============================] - 12s 305us/step - loss: 0.2639\n",
++      "39912/39912 [==============================] - 5s 120us/step - loss: 0.2476\n",
+       "Epoch 67/100\n",
+-      "40102/40102 [==============================] - 16s 409us/step - loss: 0.2545\n",
++      "39912/39912 [==============================] - 5s 119us/step - loss: 0.2385\n",
+       "Epoch 68/100\n",
+-      "40102/40102 [==============================] - 11s 268us/step - loss: 0.2454\n",
++      "39912/39912 [==============================] - 5s 118us/step - loss: 0.2300\n",
+       "Epoch 69/100\n",
+-      "40102/40102 [==============================] - 9s 233us/step - loss: 0.2367\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 0.2217\n",
+       "Epoch 70/100\n",
+-      "40102/40102 [==============================] - 10s 254us/step - loss: 0.2283\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 0.2136\n",
+       "Epoch 71/100\n",
+-      "40102/40102 [==============================] - 10s 258us/step - loss: 0.2199\n",
++      "39912/39912 [==============================] - 5s 118us/step - loss: 0.2057\n",
+       "Epoch 72/100\n",
+-      "40102/40102 [==============================] - 10s 254us/step - loss: 0.2120\n",
++      "39912/39912 [==============================] - 5s 115us/step - loss: 0.1982\n",
+       "Epoch 73/100\n",
+-      "40102/40102 [==============================] - 10s 239us/step - loss: 0.2043\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 0.1908\n",
+       "Epoch 74/100\n",
+-      "40102/40102 [==============================] - 11s 277us/step - loss: 0.1969\n",
++      "39912/39912 [==============================] - 5s 119us/step - loss: 0.1836\n",
+       "Epoch 75/100\n",
+-      "40102/40102 [==============================] - 10s 250us/step - loss: 0.1897\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 0.1767\n",
+       "Epoch 76/100\n",
+-      "40102/40102 [==============================] - 11s 283us/step - loss: 0.1827\n",
++      "39912/39912 [==============================] - 5s 123us/step - loss: 0.1702\n",
+       "Epoch 77/100\n",
+-      "40102/40102 [==============================] - 10s 261us/step - loss: 0.1760\n",
++      "39912/39912 [==============================] - 5s 118us/step - loss: 0.1638\n",
+       "Epoch 78/100\n",
+-      "40102/40102 [==============================] - 9s 234us/step - loss: 0.1697\n",
++      "39912/39912 [==============================] - 5s 121us/step - loss: 0.1576\n",
+       "Epoch 79/100\n",
+-      "40102/40102 [==============================] - 10s 259us/step - loss: 0.1634\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 0.1516\n",
+       "Epoch 80/100\n",
+-      "40102/40102 [==============================] - 10s 245us/step - loss: 0.1573\n",
++      "39912/39912 [==============================] - 5s 119us/step - loss: 0.1459\n",
+       "Epoch 81/100\n",
+-      "40102/40102 [==============================] - 10s 248us/step - loss: 0.1515\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 0.1405\n",
+       "Epoch 82/100\n",
+-      "40102/40102 [==============================] - 11s 263us/step - loss: 0.1459\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 0.1350\n",
+       "Epoch 83/100\n",
+-      "40102/40102 [==============================] - 12s 305us/step - loss: 0.1405\n",
++      "39912/39912 [==============================] - 5s 119us/step - loss: 0.1299\n",
+       "Epoch 84/100\n",
+-      "40102/40102 [==============================] - 12s 297us/step - loss: 0.1356\n",
++      "39912/39912 [==============================] - 5s 119us/step - loss: 0.1249\n",
+       "Epoch 85/100\n",
+-      "40102/40102 [==============================] - 11s 281us/step - loss: 0.1304\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 0.1201\n",
+       "Epoch 86/100\n",
+-      "40102/40102 [==============================] - 10s 244us/step - loss: 0.1258\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 0.1154\n",
+       "Epoch 87/100\n",
+-      "40102/40102 [==============================] - 10s 241us/step - loss: 0.1211\n",
++      "39912/39912 [==============================] - 5s 118us/step - loss: 0.1110\n",
+       "Epoch 88/100\n",
+-      "40102/40102 [==============================] - 10s 255us/step - loss: 0.1168\n",
++      "39912/39912 [==============================] - 5s 121us/step - loss: 0.1068\n",
+       "Epoch 89/100\n",
+-      "40102/40102 [==============================] - 11s 271us/step - loss: 0.1125\n",
++      "39912/39912 [==============================] - 5s 125us/step - loss: 0.1026\n",
+       "Epoch 90/100\n",
+-      "40102/40102 [==============================] - 9s 235us/step - loss: 0.1085\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 0.0986\n",
+       "Epoch 91/100\n",
+-      "40102/40102 [==============================] - 10s 243us/step - loss: 0.1048\n",
++      "39912/39912 [==============================] - 5s 118us/step - loss: 0.0949\n",
+       "Epoch 92/100\n",
+-      "40102/40102 [==============================] - 10s 257us/step - loss: 0.1011\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 0.0914\n",
+       "Epoch 93/100\n",
+-      "40102/40102 [==============================] - 11s 263us/step - loss: 0.0975\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 0.0878\n",
+       "Epoch 94/100\n",
+-      "40102/40102 [==============================] - 10s 255us/step - loss: 0.0942\n",
++      "39912/39912 [==============================] - 5s 115us/step - loss: 0.0846\n",
+       "Epoch 95/100\n",
+-      "40102/40102 [==============================] - 11s 268us/step - loss: 0.0908\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 0.0813\n",
+       "Epoch 96/100\n",
+-      "40102/40102 [==============================] - 10s 261us/step - loss: 0.0878\n",
++      "39912/39912 [==============================] - 5s 115us/step - loss: 0.0783\n",
+       "Epoch 97/100\n",
+-      "40102/40102 [==============================] - 11s 267us/step - loss: 0.0847\n",
++      "39912/39912 [==============================] - 5s 117us/step - loss: 0.0754\n",
+       "Epoch 98/100\n",
+-      "40102/40102 [==============================] - 9s 227us/step - loss: 0.0819\n",
++      "39912/39912 [==============================] - 5s 114us/step - loss: 0.0727\n",
+       "Epoch 99/100\n",
+-      "40102/40102 [==============================] - 10s 260us/step - loss: 0.0790\n",
++      "39912/39912 [==============================] - 5s 116us/step - loss: 0.0699\n",
+       "Epoch 100/100\n",
+-      "40102/40102 [==============================] - 11s 268us/step - loss: 0.0765\n"
++      "39912/39912 [==============================] - 5s 117us/step - loss: 0.0674\n"
+      ]
+     }
+    ],
+@@ -838,27 +743,29 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 41,
++   "execution_count": 27,
+    "metadata": {},
+    "outputs": [
+     {
+      "data": {
+       "text/plain": [
+-       "[<matplotlib.lines.Line2D at 0x1a44fef9b0>]"
++       "[<matplotlib.lines.Line2D at 0x7fb0b46f2710>]"
+       ]
+      },
+-     "execution_count": 41,
++     "execution_count": 27,
+      "metadata": {},
+      "output_type": "execute_result"
+     },
+     {
+      "data": {
+-      "image/png": "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\n",
++      "image/png": "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\n",
+       "text/plain": [
+        "<Figure size 432x288 with 1 Axes>"
+       ]
+      },
+-     "metadata": {},
++     "metadata": {
++      "needs_background": "light"
++     },
+      "output_type": "display_data"
+     }
+    ],
+@@ -868,16 +775,16 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 44,
++   "execution_count": 28,
+    "metadata": {},
+    "outputs": [
+     {
+      "data": {
+       "text/plain": [
+-       "4.2566359948675405"
++       "4.271703607138486"
+       ]
+      },
+-     "execution_count": 44,
++     "execution_count": 28,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -912,7 +819,7 @@
+    "name": "python",
+    "nbconvert_exporter": "python",
+    "pygments_lexer": "ipython3",
+-   "version": "3.6.8"
++   "version": "3.7.3"
+   }
+  },
+  "nbformat": 4,
+diff --git a/recos.ipynb b/recos.ipynb
+index 368449e..3977c5f 100644
+--- a/recos.ipynb
++++ b/recos.ipynb
+@@ -9,12 +9,14 @@
+      "name": "stderr",
+      "output_type": "stream",
+      "text": [
+-      "//anaconda/envs/py3l/lib/python3.6/site-packages/matplotlib/__init__.py:855: MatplotlibDeprecationWarning: \n",
++      "/opt/conda/lib/python3.7/site-packages/matplotlib/__init__.py:855: MatplotlibDeprecationWarning: \n",
+       "examples.directory is deprecated; in the future, examples will be found relative to the 'datapath' directory.\n",
+       "  \"found relative to the 'datapath' directory.\".format(key))\n",
+-      "//anaconda/envs/py3l/lib/python3.6/site-packages/matplotlib/__init__.py:846: MatplotlibDeprecationWarning: \n",
++      "/opt/conda/lib/python3.7/site-packages/matplotlib/__init__.py:846: MatplotlibDeprecationWarning: \n",
+       "The text.latex.unicode rcparam was deprecated in Matplotlib 2.2 and will be removed in 3.1.\n",
+-      "  \"2.2\", name=key, obj_type=\"rcparam\", addendum=addendum)\n"
++      "  \"2.2\", name=key, obj_type=\"rcparam\", addendum=addendum)\n",
++      "/opt/conda/lib/python3.7/site-packages/seaborn/apionly.py:9: UserWarning: As seaborn no longer sets a default style on import, the seaborn.apionly module is deprecated. It will be removed in a future version.\n",
++      "  warnings.warn(msg, UserWarning)\n"
+      ]
+     }
+    ],
+@@ -31,7 +33,27 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 21,
++   "execution_count": 43,
++   "metadata": {},
++   "outputs": [
++    {
++     "name": "stdout",
++     "output_type": "stream",
++     "text": [
++      "W&B Run: https://app.wandb.ai/univai-ss2019/HackRecos/runs/i0vvz7x2\n",
++      "Call `%%wandb` in the cell containing your training loop to display live results.\n"
++     ]
++    }
++   ],
++   "source": [
++    "import wandb\n",
++    "from wandb.keras import WandbCallback\n",
++    "run = wandb.init()"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 3,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -110,19 +132,19 @@
+        "4       1       50     3.5  1112484580"
+       ]
+      },
+-     "execution_count": 21,
++     "execution_count": 3,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+    ],
+    "source": [
+-    "df = pd.read_csv(\"data/ratings.csv.gz\", compression='gzip')\n",
++    "df = pd.read_csv(\"ratings.csv.gz\", compression='gzip')\n",
+     "df.head()"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 22,
++   "execution_count": 4,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -195,7 +217,7 @@
+        "4       1       50     3.5"
+       ]
+      },
+-     "execution_count": 22,
++     "execution_count": 4,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -207,7 +229,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 23,
++   "execution_count": 5,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -216,7 +238,7 @@
+        "Index(['userId', 'movieId', 'rating'], dtype='object')"
+       ]
+      },
+-     "execution_count": 23,
++     "execution_count": 5,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -227,16 +249,16 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 24,
++   "execution_count": 47,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+-    "df2 = df.sample(50000)"
++    "df2 = df.sample(500000)"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 25,
++   "execution_count": 48,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -246,16 +268,16 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 26,
++   "execution_count": 49,
+    "metadata": {},
+    "outputs": [
+     {
+      "data": {
+       "text/plain": [
+-       "50000"
++       "500000"
+       ]
+      },
+-     "execution_count": 26,
++     "execution_count": 49,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -267,16 +289,16 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 27,
++   "execution_count": 50,
+    "metadata": {},
+    "outputs": [
+     {
+      "data": {
+       "text/plain": [
+-       "(33243, 6594)"
++       "(107014, 13147)"
+       ]
+      },
+-     "execution_count": 27,
++     "execution_count": 50,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -289,7 +311,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 28,
++   "execution_count": 10,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -320,34 +342,34 @@
+        "  </thead>\n",
+        "  <tbody>\n",
+        "    <tr>\n",
+-       "      <th>2703571</th>\n",
+-       "      <td>4539</td>\n",
+-       "      <td>1492</td>\n",
+-       "      <td>2.5</td>\n",
++       "      <th>16724527</th>\n",
++       "      <td>27904</td>\n",
++       "      <td>941</td>\n",
++       "      <td>3.0</td>\n",
+        "    </tr>\n",
+        "    <tr>\n",
+-       "      <th>12887545</th>\n",
+-       "      <td>21449</td>\n",
+-       "      <td>1147</td>\n",
+-       "      <td>4.0</td>\n",
++       "      <th>6211895</th>\n",
++       "      <td>10252</td>\n",
++       "      <td>395</td>\n",
++       "      <td>2.5</td>\n",
+        "    </tr>\n",
+        "    <tr>\n",
+-       "      <th>16996832</th>\n",
+-       "      <td>28335</td>\n",
+-       "      <td>823</td>\n",
+-       "      <td>3.0</td>\n",
++       "      <th>18570244</th>\n",
++       "      <td>31047</td>\n",
++       "      <td>6415</td>\n",
++       "      <td>4.0</td>\n",
+        "    </tr>\n",
+        "    <tr>\n",
+-       "      <th>905459</th>\n",
+-       "      <td>1545</td>\n",
+-       "      <td>775</td>\n",
+-       "      <td>4.5</td>\n",
++       "      <th>44365</th>\n",
++       "      <td>74</td>\n",
++       "      <td>3378</td>\n",
++       "      <td>2.0</td>\n",
+        "    </tr>\n",
+        "    <tr>\n",
+-       "      <th>845713</th>\n",
+-       "      <td>1439</td>\n",
+-       "      <td>178</td>\n",
+-       "      <td>3.0</td>\n",
++       "      <th>18513152</th>\n",
++       "      <td>30961</td>\n",
++       "      <td>788</td>\n",
++       "      <td>2.5</td>\n",
+        "    </tr>\n",
+        "  </tbody>\n",
+        "</table>\n",
+@@ -355,14 +377,14 @@
+       ],
+       "text/plain": [
+        "          userId  movieId  rating\n",
+-       "2703571     4539     1492     2.5\n",
+-       "12887545   21449     1147     4.0\n",
+-       "16996832   28335      823     3.0\n",
+-       "905459      1545      775     4.5\n",
+-       "845713      1439      178     3.0"
++       "16724527   27904      941     3.0\n",
++       "6211895    10252      395     2.5\n",
++       "18570244   31047     6415     4.0\n",
++       "44365         74     3378     2.0\n",
++       "18513152   30961      788     2.5"
+       ]
+      },
+-     "execution_count": 28,
++     "execution_count": 10,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -373,17 +395,17 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 29,
++   "execution_count": 51,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+     "np.random.seed=2017\n",
+-    "mask = np.random.rand(50000) < 0.8"
++    "mask = np.random.rand(500000) < 0.8"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 30,
++   "execution_count": 53,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -393,27 +415,54 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 36,
++   "execution_count": 61,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+     "import keras\n",
++    "from keras.models import Sequential\n",
++    "from keras.layers import Activation, Dropout, Flatten, Dense\n",
++    "\n",
+     "movie_input = keras.layers.Input(shape=[1],name='movieId')\n",
+     "movie_embedding = keras.layers.Embedding(n_movies + 1, n_factors, name='movieEmbedding')(movie_input)\n",
+-    "movie_vec = keras.layers.Flatten(name='movieFlatten')(movie_embedding)\n",
++    "movie_embedding_droput = keras.layers.Dropout(0.2)(movie_embedding) \n",
++    "movie_vec = keras.layers.Flatten(name='movieFlatten')(movie_embedding_droput)\n",
+     "\n",
+     "user_input = keras.layers.Input(shape=[1],name='userId')\n",
+     "user_embedding = keras.layers.Embedding(n_users + 1, n_factors,name='userEmbedding')(user_input)\n",
+-    "user_vec = keras.layers.Flatten(name='userFlatten')(user_embedding)\n",
++    "user_embedding_dropout = keras.layers.Dropout(0.2)(user_embedding)\n",
++    "user_vec = keras.layers.Flatten(name='userFlatten')(user_embedding_dropout)\n",
+     "\n",
+     "prod = keras.layers.Dot(axes=1, name=\"MatrixFactorization\")([movie_vec, user_vec] )\n",
+-    "model = keras.Model([user_input, movie_input], prod)\n",
++    "act = keras.layers.Activation('hard_sigmoid')(prod)\n",
++    "fin_prod = keras.layers.Lambda(lambda x: 5*x + 0.5)(act)\n",
++    "model = keras.Model([user_input, movie_input], fin_prod)\n",
+     "model.compile('adam', 'mse')"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 37,
++   "execution_count": 20,
++   "metadata": {},
++   "outputs": [
++    {
++     "data": {
++      "text/plain": [
++       "<tf.Tensor 'movieId:0' shape=(?, 1) dtype=float32>"
++      ]
++     },
++     "execution_count": 20,
++     "metadata": {},
++     "output_type": "execute_result"
++    }
++   ],
++   "source": [
++    "movie_input"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 62,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -427,19 +476,27 @@
+       "__________________________________________________________________________________________________\n",
+       "userId (InputLayer)             (None, 1)            0                                            \n",
+       "__________________________________________________________________________________________________\n",
+-      "movieEmbedding (Embedding)      (None, 1, 3)         19785       movieId[0][0]                    \n",
++      "movieEmbedding (Embedding)      (None, 1, 3)         39444       movieId[0][0]                    \n",
++      "__________________________________________________________________________________________________\n",
++      "userEmbedding (Embedding)       (None, 1, 3)         321045      userId[0][0]                     \n",
+       "__________________________________________________________________________________________________\n",
+-      "userEmbedding (Embedding)       (None, 1, 3)         99732       userId[0][0]                     \n",
++      "dropout_9 (Dropout)             (None, 1, 3)         0           movieEmbedding[0][0]             \n",
+       "__________________________________________________________________________________________________\n",
+-      "movieFlatten (Flatten)          (None, 3)            0           movieEmbedding[0][0]             \n",
++      "dropout_10 (Dropout)            (None, 1, 3)         0           userEmbedding[0][0]              \n",
+       "__________________________________________________________________________________________________\n",
+-      "userFlatten (Flatten)           (None, 3)            0           userEmbedding[0][0]              \n",
++      "movieFlatten (Flatten)          (None, 3)            0           dropout_9[0][0]                  \n",
++      "__________________________________________________________________________________________________\n",
++      "userFlatten (Flatten)           (None, 3)            0           dropout_10[0][0]                 \n",
+       "__________________________________________________________________________________________________\n",
+       "MatrixFactorization (Dot)       (None, 1)            0           movieFlatten[0][0]               \n",
+       "                                                                 userFlatten[0][0]                \n",
++      "__________________________________________________________________________________________________\n",
++      "activation_2 (Activation)       (None, 1)            0           MatrixFactorization[0][0]        \n",
++      "__________________________________________________________________________________________________\n",
++      "lambda_1 (Lambda)               (None, 1)            0           activation_2[0][0]               \n",
+       "==================================================================================================\n",
+-      "Total params: 119,517\n",
+-      "Trainable params: 119,517\n",
++      "Total params: 360,489\n",
++      "Trainable params: 360,489\n",
+       "Non-trainable params: 0\n",
+       "__________________________________________________________________________________________________\n"
+      ]
+@@ -451,167 +508,27 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 45,
++   "execution_count": 24,
+    "metadata": {},
+-   "outputs": [
+-    {
+-     "data": {
+-      "image/svg+xml": [
+-       "<svg height=\"296pt\" viewBox=\"0.00 0.00 667.96 296.00\" width=\"668pt\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n",
+-       "<g class=\"graph\" id=\"graph0\" transform=\"scale(1 1) rotate(0) translate(4 292)\">\n",
+-       "<title>G</title>\n",
+-       "<polygon fill=\"white\" points=\"-4,4 -4,-292 663.956,-292 663.956,4 -4,4\" stroke=\"none\"/>\n",
+-       "<!-- 111995810536 -->\n",
+-       "<g class=\"node\" id=\"node1\"><title>111995810536</title>\n",
+-       "<polygon fill=\"none\" points=\"34.6172,-243.5 34.6172,-287.5 292.173,-287.5 292.173,-243.5 34.6172,-243.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"100.736\" y=\"-261.3\">movieId: InputLayer</text>\n",
+-       "<polyline fill=\"none\" points=\"166.855,-243.5 166.855,-287.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"194.69\" y=\"-272.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"166.855,-265.5 222.524,-265.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"194.69\" y=\"-250.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"222.524,-243.5 222.524,-287.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"257.349\" y=\"-272.3\">(None, 1)</text>\n",
+-       "<polyline fill=\"none\" points=\"222.524,-265.5 292.173,-265.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"257.349\" y=\"-250.3\">(None, 1)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810704 -->\n",
+-       "<g class=\"node\" id=\"node3\"><title>111995810704</title>\n",
+-       "<polygon fill=\"none\" points=\"0,-162.5 0,-206.5 326.79,-206.5 326.79,-162.5 0,-162.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"93.7363\" y=\"-180.3\">movieEmbedding: Embedding</text>\n",
+-       "<polyline fill=\"none\" points=\"187.473,-162.5 187.473,-206.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"215.307\" y=\"-191.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"187.473,-184.5 243.142,-184.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"215.307\" y=\"-169.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"243.142,-162.5 243.142,-206.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"284.966\" y=\"-191.3\">(None, 1)</text>\n",
+-       "<polyline fill=\"none\" points=\"243.142,-184.5 326.79,-184.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"284.966\" y=\"-169.3\">(None, 1, 3)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810536&#45;&gt;111995810704 -->\n",
+-       "<g class=\"edge\" id=\"edge1\"><title>111995810536-&gt;111995810704</title>\n",
+-       "<path d=\"M163.395,-243.329C163.395,-235.183 163.395,-225.699 163.395,-216.797\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"166.895,-216.729 163.395,-206.729 159.895,-216.729 166.895,-216.729\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "<!-- 111995810760 -->\n",
+-       "<g class=\"node\" id=\"node2\"><title>111995810760</title>\n",
+-       "<polygon fill=\"none\" points=\"379.452,-243.5 379.452,-287.5 625.338,-287.5 625.338,-243.5 379.452,-243.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"439.736\" y=\"-261.3\">userId: InputLayer</text>\n",
+-       "<polyline fill=\"none\" points=\"500.021,-243.5 500.021,-287.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"527.855\" y=\"-272.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"500.021,-265.5 555.69,-265.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"527.855\" y=\"-250.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"555.69,-243.5 555.69,-287.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"590.514\" y=\"-272.3\">(None, 1)</text>\n",
+-       "<polyline fill=\"none\" points=\"555.69,-265.5 625.338,-265.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"590.514\" y=\"-250.3\">(None, 1)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810872 -->\n",
+-       "<g class=\"node\" id=\"node4\"><title>111995810872</title>\n",
+-       "<polygon fill=\"none\" points=\"344.834,-162.5 344.834,-206.5 659.956,-206.5 659.956,-162.5 344.834,-162.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"432.736\" y=\"-180.3\">userEmbedding: Embedding</text>\n",
+-       "<polyline fill=\"none\" points=\"520.638,-162.5 520.638,-206.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"548.473\" y=\"-191.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"520.638,-184.5 576.307,-184.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"548.473\" y=\"-169.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"576.307,-162.5 576.307,-206.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"618.131\" y=\"-191.3\">(None, 1)</text>\n",
+-       "<polyline fill=\"none\" points=\"576.307,-184.5 659.956,-184.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"618.131\" y=\"-169.3\">(None, 1, 3)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810760&#45;&gt;111995810872 -->\n",
+-       "<g class=\"edge\" id=\"edge2\"><title>111995810760-&gt;111995810872</title>\n",
+-       "<path d=\"M502.395,-243.329C502.395,-235.183 502.395,-225.699 502.395,-216.797\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"505.895,-216.729 502.395,-206.729 498.895,-216.729 505.895,-216.729\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "<!-- 111995810816 -->\n",
+-       "<g class=\"node\" id=\"node5\"><title>111995810816</title>\n",
+-       "<polygon fill=\"none\" points=\"50.6621,-81.5 50.6621,-125.5 326.128,-125.5 326.128,-81.5 50.6621,-81.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"118.736\" y=\"-99.3\">movieFlatten: Flatten</text>\n",
+-       "<polyline fill=\"none\" points=\"186.811,-81.5 186.811,-125.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"214.645\" y=\"-110.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"186.811,-103.5 242.479,-103.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"214.645\" y=\"-88.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"242.479,-81.5 242.479,-125.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"284.304\" y=\"-110.3\">(None, 1, 3)</text>\n",
+-       "<polyline fill=\"none\" points=\"242.479,-103.5 326.128,-103.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"284.304\" y=\"-88.3\">(None, 3)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810704&#45;&gt;111995810816 -->\n",
+-       "<g class=\"edge\" id=\"edge3\"><title>111995810704-&gt;111995810816</title>\n",
+-       "<path d=\"M170.095,-162.329C172.701,-154.094 175.739,-144.493 178.583,-135.507\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"181.997,-136.319 181.677,-125.729 175.323,-134.207 181.997,-136.319\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "<!-- 111995811040 -->\n",
+-       "<g class=\"node\" id=\"node6\"><title>111995811040</title>\n",
+-       "<polygon fill=\"none\" points=\"357.497,-81.5 357.497,-125.5 621.293,-125.5 621.293,-81.5 357.497,-81.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"419.736\" y=\"-99.3\">userFlatten: Flatten</text>\n",
+-       "<polyline fill=\"none\" points=\"481.976,-81.5 481.976,-125.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"509.811\" y=\"-110.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"481.976,-103.5 537.645,-103.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"509.811\" y=\"-88.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"537.645,-81.5 537.645,-125.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"579.469\" y=\"-110.3\">(None, 1, 3)</text>\n",
+-       "<polyline fill=\"none\" points=\"537.645,-103.5 621.293,-103.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"579.469\" y=\"-88.3\">(None, 3)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810872&#45;&gt;111995811040 -->\n",
+-       "<g class=\"edge\" id=\"edge4\"><title>111995810872-&gt;111995811040</title>\n",
+-       "<path d=\"M498.911,-162.329C497.571,-154.183 496.01,-144.699 494.545,-135.797\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"497.966,-135.028 492.888,-125.729 491.059,-136.165 497.966,-135.028\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "<!-- 111995811152 -->\n",
+-       "<g class=\"node\" id=\"node7\"><title>111995811152</title>\n",
+-       "<polygon fill=\"none\" points=\"162.572,-0.5 162.572,-44.5 514.218,-44.5 514.218,-0.5 162.572,-0.5\" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"240.75\" y=\"-18.3\">MatrixFactorization: Dot</text>\n",
+-       "<polyline fill=\"none\" points=\"318.928,-0.5 318.928,-44.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"346.762\" y=\"-29.3\">input:</text>\n",
+-       "<polyline fill=\"none\" points=\"318.928,-22.5 374.597,-22.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"346.762\" y=\"-7.3\">output:</text>\n",
+-       "<polyline fill=\"none\" points=\"374.597,-0.5 374.597,-44.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"444.407\" y=\"-29.3\">[(None, 3), (None, 3)]</text>\n",
+-       "<polyline fill=\"none\" points=\"374.597,-22.5 514.218,-22.5 \" stroke=\"black\"/>\n",
+-       "<text font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"443.921\" y=\"-7.3\">(None, 1)</text>\n",
+-       "</g>\n",
+-       "<!-- 111995810816&#45;&gt;111995811152 -->\n",
+-       "<g class=\"edge\" id=\"edge5\"><title>111995810816-&gt;111995811152</title>\n",
+-       "<path d=\"M228.592,-81.3294C247.246,-71.5049 269.591,-59.7366 289.24,-49.3883\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"291.13,-52.3486 298.347,-44.5919 287.868,-46.1551 291.13,-52.3486\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "<!-- 111995811040&#45;&gt;111995811152 -->\n",
+-       "<g class=\"edge\" id=\"edge6\"><title>111995811040-&gt;111995811152</title>\n",
+-       "<path d=\"M448.93,-81.3294C430.066,-71.4605 407.454,-59.63 387.609,-49.2479\" fill=\"none\" stroke=\"black\"/>\n",
+-       "<polygon fill=\"black\" points=\"389.193,-46.1264 378.71,-44.5919 385.948,-52.3288 389.193,-46.1264\" stroke=\"black\"/>\n",
+-       "</g>\n",
+-       "</g>\n",
+-       "</svg>"
+-      ],
+-      "text/plain": [
+-       "<IPython.core.display.SVG object>"
+-      ]
+-     },
+-     "execution_count": 45,
+-     "metadata": {},
+-     "output_type": "execute_result"
+-    }
+-   ],
++   "outputs": [],
+    "source": [
+     "from keras.utils.vis_utils import model_to_dot\n",
+     "from IPython.display import SVG\n",
+-    "SVG(model_to_dot(model,  show_shapes=True, show_layer_names=True, rankdir='HB').create(prog='dot', format='svg'))"
++    "# SVG(model_to_dot(model,  show_shapes=True, show_layer_names=True, rankdir='HB').create(prog='dot', format='svg'))"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 39,
++   "execution_count": 33,
+    "metadata": {},
+    "outputs": [
+     {
+      "data": {
+       "text/plain": [
+-       "array([ 4539, 21449, 28335, ..., 26948,  1766, 31200], dtype=int32)"
++       "array([10252,    74, 28423, ..., 18312,  2874,  1637], dtype=int32)"
+       ]
+      },
+-     "execution_count": 39,
++     "execution_count": 33,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -622,243 +539,192 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 40,
++   "execution_count": 57,
+    "metadata": {},
+    "outputs": [
+     {
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
+-      "Epoch 1/100\n",
+-      "40102/40102 [==============================] - 10s 240us/step - loss: 13.5493\n",
+-      "Epoch 2/100\n",
+-      "40102/40102 [==============================] - 9s 227us/step - loss: 13.5154\n",
+-      "Epoch 3/100\n",
+-      "40102/40102 [==============================] - 9s 237us/step - loss: 13.3653\n",
+-      "Epoch 4/100\n",
+-      "40102/40102 [==============================] - 10s 250us/step - loss: 13.0370\n",
+-      "Epoch 5/100\n",
+-      "40102/40102 [==============================] - 10s 243us/step - loss: 12.5399\n",
+-      "Epoch 6/100\n",
+-      "40102/40102 [==============================] - 10s 246us/step - loss: 11.9038\n",
+-      "Epoch 7/100\n",
+-      "40102/40102 [==============================] - 12s 289us/step - loss: 11.1570\n",
+-      "Epoch 8/100\n",
+-      "40102/40102 [==============================] - 10s 240us/step - loss: 10.3298\n",
+-      "Epoch 9/100\n",
+-      "40102/40102 [==============================] - 9s 225us/step - loss: 9.4517\n",
+-      "Epoch 10/100\n",
+-      "40102/40102 [==============================] - 9s 223us/step - loss: 8.5550\n",
+-      "Epoch 11/100\n",
+-      "40102/40102 [==============================] - 11s 264us/step - loss: 7.6719\n",
+-      "Epoch 12/100\n",
+-      "40102/40102 [==============================] - 11s 264us/step - loss: 6.8300\n",
+-      "Epoch 13/100\n",
+-      "40102/40102 [==============================] - 10s 245us/step - loss: 6.0531\n",
+-      "Epoch 14/100\n",
+-      "40102/40102 [==============================] - 11s 264us/step - loss: 5.3547\n",
+-      "Epoch 15/100\n",
+-      "40102/40102 [==============================] - 11s 263us/step - loss: 4.7401\n",
+-      "Epoch 16/100\n",
+-      "40102/40102 [==============================] - 11s 266us/step - loss: 4.2061\n",
+-      "Epoch 17/100\n",
+-      "40102/40102 [==============================] - 11s 264us/step - loss: 3.7450\n",
+-      "Epoch 18/100\n",
+-      "40102/40102 [==============================] - 10s 254us/step - loss: 3.3484\n",
+-      "Epoch 19/100\n",
+-      "40102/40102 [==============================] - 11s 264us/step - loss: 3.0063\n",
+-      "Epoch 20/100\n",
+-      "40102/40102 [==============================] - 11s 268us/step - loss: 2.7107\n",
+-      "Epoch 21/100\n",
+-      "40102/40102 [==============================] - 11s 268us/step - loss: 2.4542\n",
+-      "Epoch 22/100\n",
+-      "40102/40102 [==============================] - 11s 283us/step - loss: 2.2311\n",
+-      "Epoch 23/100\n",
+-      "40102/40102 [==============================] - 12s 288us/step - loss: 2.0362\n",
+-      "Epoch 24/100\n",
+-      "40102/40102 [==============================] - 10s 253us/step - loss: 1.8644\n",
+-      "Epoch 25/100\n",
+-      "40102/40102 [==============================] - 11s 275us/step - loss: 1.7142\n",
+-      "Epoch 26/100\n",
+-      "40102/40102 [==============================] - 15s 385us/step - loss: 1.5807\n",
+-      "Epoch 27/100\n",
+-      "40102/40102 [==============================] - 13s 314us/step - loss: 1.4629\n",
+-      "Epoch 28/100\n",
+-      "40102/40102 [==============================] - 12s 301us/step - loss: 1.3578\n",
+-      "Epoch 29/100\n",
+-      "40102/40102 [==============================] - 12s 302us/step - loss: 1.2640\n",
+-      "Epoch 30/100\n",
+-      "40102/40102 [==============================] - 11s 283us/step - loss: 1.1801\n",
+-      "Epoch 31/100\n",
+-      "40102/40102 [==============================] - 11s 281us/step - loss: 1.1048\n",
+-      "Epoch 32/100\n",
+-      "40102/40102 [==============================] - 11s 273us/step - loss: 1.0371\n",
+-      "Epoch 33/100\n",
+-      "40102/40102 [==============================] - 11s 278us/step - loss: 0.9767\n",
+-      "Epoch 34/100\n",
+-      "40102/40102 [==============================] - 11s 273us/step - loss: 0.9211\n",
+-      "Epoch 35/100\n",
+-      "40102/40102 [==============================] - 12s 288us/step - loss: 0.8711\n",
+-      "Epoch 36/100\n",
+-      "40102/40102 [==============================] - 11s 266us/step - loss: 0.8256\n",
+-      "Epoch 37/100\n",
+-      "40102/40102 [==============================] - 11s 273us/step - loss: 0.7842\n",
+-      "Epoch 38/100\n",
+-      "40102/40102 [==============================] - 11s 284us/step - loss: 0.7463\n",
+-      "Epoch 39/100\n",
+-      "40102/40102 [==============================] - 14s 358us/step - loss: 0.7114\n",
+-      "Epoch 40/100\n",
+-      "40102/40102 [==============================] - 17s 436us/step - loss: 0.6796\n",
+-      "Epoch 41/100\n",
+-      "40102/40102 [==============================] - 18s 447us/step - loss: 0.6502\n",
+-      "Epoch 42/100\n",
+-      "40102/40102 [==============================] - 16s 396us/step - loss: 0.6230\n",
+-      "Epoch 43/100\n",
+-      "40102/40102 [==============================] - 17s 419us/step - loss: 0.5979\n",
+-      "Epoch 44/100\n",
+-      "40102/40102 [==============================] - 15s 381us/step - loss: 0.5746\n",
+-      "Epoch 45/100\n",
+-      "40102/40102 [==============================] - 16s 392us/step - loss: 0.5530\n",
+-      "Epoch 46/100\n",
+-      "40102/40102 [==============================] - 17s 418us/step - loss: 0.5326\n",
+-      "Epoch 47/100\n",
+-      "40102/40102 [==============================] - 16s 396us/step - loss: 0.5135\n",
+-      "Epoch 48/100\n",
+-      "40102/40102 [==============================] - 14s 358us/step - loss: 0.4954\n",
+-      "Epoch 49/100\n",
+-      "40102/40102 [==============================] - 14s 356us/step - loss: 0.4783\n",
+-      "Epoch 50/100\n",
+-      "40102/40102 [==============================] - 18s 439us/step - loss: 0.4618\n",
+-      "Epoch 51/100\n",
+-      "40102/40102 [==============================] - 12s 309us/step - loss: 0.4460\n",
+-      "Epoch 52/100\n",
+-      "40102/40102 [==============================] - 11s 271us/step - loss: 0.4308\n",
+-      "Epoch 53/100\n",
+-      "40102/40102 [==============================] - 12s 310us/step - loss: 0.4163\n",
+-      "Epoch 54/100\n",
+-      "40102/40102 [==============================] - 13s 319us/step - loss: 0.4022\n",
+-      "Epoch 55/100\n",
+-      "40102/40102 [==============================] - 13s 324us/step - loss: 0.3885\n",
+-      "Epoch 56/100\n",
+-      "40102/40102 [==============================] - 14s 342us/step - loss: 0.3752\n",
+-      "Epoch 57/100\n",
+-      "40102/40102 [==============================] - 15s 379us/step - loss: 0.3625\n",
+-      "Epoch 58/100\n",
+-      "40102/40102 [==============================] - 15s 377us/step - loss: 0.3501\n",
+-      "Epoch 59/100\n",
+-      "40102/40102 [==============================] - 15s 368us/step - loss: 0.3381\n",
+-      "Epoch 60/100\n",
+-      "40102/40102 [==============================] - 15s 371us/step - loss: 0.3264\n",
+-      "Epoch 61/100\n",
+-      "40102/40102 [==============================] - 15s 366us/step - loss: 0.3152\n",
+-      "Epoch 62/100\n",
+-      "40102/40102 [==============================] - 14s 355us/step - loss: 0.3044\n",
+-      "Epoch 63/100\n",
+-      "40102/40102 [==============================] - 13s 321us/step - loss: 0.2937\n",
+-      "Epoch 64/100\n",
+-      "40102/40102 [==============================] - 12s 308us/step - loss: 0.2833\n",
+-      "Epoch 65/100\n",
+-      "40102/40102 [==============================] - 13s 312us/step - loss: 0.2735\n",
+-      "Epoch 66/100\n",
+-      "40102/40102 [==============================] - 12s 305us/step - loss: 0.2639\n",
+-      "Epoch 67/100\n",
+-      "40102/40102 [==============================] - 16s 409us/step - loss: 0.2545\n",
+-      "Epoch 68/100\n",
+-      "40102/40102 [==============================] - 11s 268us/step - loss: 0.2454\n",
+-      "Epoch 69/100\n",
+-      "40102/40102 [==============================] - 9s 233us/step - loss: 0.2367\n",
+-      "Epoch 70/100\n",
+-      "40102/40102 [==============================] - 10s 254us/step - loss: 0.2283\n",
+-      "Epoch 71/100\n",
+-      "40102/40102 [==============================] - 10s 258us/step - loss: 0.2199\n",
+-      "Epoch 72/100\n",
+-      "40102/40102 [==============================] - 10s 254us/step - loss: 0.2120\n",
+-      "Epoch 73/100\n",
+-      "40102/40102 [==============================] - 10s 239us/step - loss: 0.2043\n",
+-      "Epoch 74/100\n",
+-      "40102/40102 [==============================] - 11s 277us/step - loss: 0.1969\n",
+-      "Epoch 75/100\n",
+-      "40102/40102 [==============================] - 10s 250us/step - loss: 0.1897\n",
+-      "Epoch 76/100\n",
+-      "40102/40102 [==============================] - 11s 283us/step - loss: 0.1827\n",
+-      "Epoch 77/100\n",
+-      "40102/40102 [==============================] - 10s 261us/step - loss: 0.1760\n",
+-      "Epoch 78/100\n",
+-      "40102/40102 [==============================] - 9s 234us/step - loss: 0.1697\n",
+-      "Epoch 79/100\n",
+-      "40102/40102 [==============================] - 10s 259us/step - loss: 0.1634\n",
+-      "Epoch 80/100\n",
+-      "40102/40102 [==============================] - 10s 245us/step - loss: 0.1573\n",
+-      "Epoch 81/100\n",
+-      "40102/40102 [==============================] - 10s 248us/step - loss: 0.1515\n",
+-      "Epoch 82/100\n",
+-      "40102/40102 [==============================] - 11s 263us/step - loss: 0.1459\n",
+-      "Epoch 83/100\n",
+-      "40102/40102 [==============================] - 12s 305us/step - loss: 0.1405\n",
+-      "Epoch 84/100\n",
+-      "40102/40102 [==============================] - 12s 297us/step - loss: 0.1356\n",
+-      "Epoch 85/100\n",
+-      "40102/40102 [==============================] - 11s 281us/step - loss: 0.1304\n",
+-      "Epoch 86/100\n",
+-      "40102/40102 [==============================] - 10s 244us/step - loss: 0.1258\n",
+-      "Epoch 87/100\n",
+-      "40102/40102 [==============================] - 10s 241us/step - loss: 0.1211\n",
+-      "Epoch 88/100\n",
+-      "40102/40102 [==============================] - 10s 255us/step - loss: 0.1168\n",
+-      "Epoch 89/100\n",
+-      "40102/40102 [==============================] - 11s 271us/step - loss: 0.1125\n",
+-      "Epoch 90/100\n",
+-      "40102/40102 [==============================] - 9s 235us/step - loss: 0.1085\n",
+-      "Epoch 91/100\n",
+-      "40102/40102 [==============================] - 10s 243us/step - loss: 0.1048\n",
+-      "Epoch 92/100\n",
+-      "40102/40102 [==============================] - 10s 257us/step - loss: 0.1011\n",
+-      "Epoch 93/100\n",
+-      "40102/40102 [==============================] - 11s 263us/step - loss: 0.0975\n",
+-      "Epoch 94/100\n",
+-      "40102/40102 [==============================] - 10s 255us/step - loss: 0.0942\n",
+-      "Epoch 95/100\n",
+-      "40102/40102 [==============================] - 11s 268us/step - loss: 0.0908\n",
+-      "Epoch 96/100\n",
+-      "40102/40102 [==============================] - 10s 261us/step - loss: 0.0878\n",
+-      "Epoch 97/100\n",
+-      "40102/40102 [==============================] - 11s 267us/step - loss: 0.0847\n",
+-      "Epoch 98/100\n",
+-      "40102/40102 [==============================] - 9s 227us/step - loss: 0.0819\n",
+-      "Epoch 99/100\n",
+-      "40102/40102 [==============================] - 10s 260us/step - loss: 0.0790\n",
+-      "Epoch 100/100\n",
+-      "40102/40102 [==============================] - 11s 268us/step - loss: 0.0765\n"
++      "Epoch 1/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 6.8022\n",
++      "Epoch 2/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 6.4542\n",
++      "Epoch 3/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 6.1460\n",
++      "Epoch 4/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 5.8761\n",
++      "Epoch 5/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 5.6632\n",
++      "Epoch 6/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 5.4959\n",
++      "Epoch 7/70\n",
++      "399970/399970 [==============================] - 4s 10us/step - loss: 5.3316\n",
++      "Epoch 8/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 5.2006\n",
++      "Epoch 9/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 5.0483\n",
++      "Epoch 10/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.9598\n",
++      "Epoch 11/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.8682\n",
++      "Epoch 12/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.7704\n",
++      "Epoch 13/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.7105\n",
++      "Epoch 14/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.6268\n",
++      "Epoch 15/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.5743\n",
++      "Epoch 16/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.5014\n",
++      "Epoch 17/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.4724\n",
++      "Epoch 18/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.4071\n",
++      "Epoch 19/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.3552\n",
++      "Epoch 20/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.3177\n",
++      "Epoch 21/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.2787\n",
++      "Epoch 22/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.2458\n",
++      "Epoch 23/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.1943\n",
++      "Epoch 24/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.1749\n",
++      "Epoch 25/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.1291\n",
++      "Epoch 26/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.1029\n",
++      "Epoch 27/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.0792\n",
++      "Epoch 28/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.0264\n",
++      "Epoch 29/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 4.0072\n",
++      "Epoch 30/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.9635\n",
++      "Epoch 31/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.9532\n",
++      "Epoch 32/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.9410\n",
++      "Epoch 33/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.9103\n",
++      "Epoch 34/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.8638\n",
++      "Epoch 35/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.8461\n",
++      "Epoch 36/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.8150\n",
++      "Epoch 37/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.7920\n",
++      "Epoch 38/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.7589\n",
++      "Epoch 39/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.7554\n",
++      "Epoch 40/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.7459\n",
++      "Epoch 41/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.7175\n",
++      "Epoch 42/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.6891\n",
++      "Epoch 43/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.6560\n",
++      "Epoch 44/70\n",
++      "399970/399970 [==============================] - 4s 10us/step - loss: 3.6490\n",
++      "Epoch 45/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.6068\n",
++      "Epoch 46/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.5984\n",
++      "Epoch 47/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.5918\n",
++      "Epoch 48/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.5635\n",
++      "Epoch 49/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.5487\n",
++      "Epoch 50/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.5475\n",
++      "Epoch 51/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.5196\n",
++      "Epoch 52/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.4962\n",
++      "Epoch 53/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.4761\n",
++      "Epoch 54/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.4712\n",
++      "Epoch 55/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.4406\n",
++      "Epoch 56/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.4446\n",
++      "Epoch 57/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.4248\n",
++      "Epoch 58/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.4062\n",
++      "Epoch 59/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.3853\n",
++      "Epoch 60/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.3702\n",
++      "Epoch 61/70\n",
++      "399970/399970 [==============================] - 4s 10us/step - loss: 3.3637\n",
++      "Epoch 62/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.3356\n",
++      "Epoch 63/70\n",
++      "399970/399970 [==============================] - 4s 10us/step - loss: 3.3324\n",
++      "Epoch 64/70\n",
++      "399970/399970 [==============================] - 4s 10us/step - loss: 3.3188\n",
++      "Epoch 65/70\n",
++      "399970/399970 [==============================] - 4s 10us/step - loss: 3.3048\n",
++      "Epoch 66/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.2958\n",
++      "Epoch 67/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.2893\n",
++      "Epoch 68/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.2823\n",
++      "Epoch 69/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.2694\n",
++      "Epoch 70/70\n",
++      "399970/399970 [==============================] - 4s 9us/step - loss: 3.2510\n"
++     ]
++    },
++    {
++     "name": "stderr",
++     "output_type": "stream",
++     "text": [
++      "UsageError: Line magic function `%%wandb` not found.\n"
+      ]
+     }
+    ],
+    "source": [
+-    "history = model.fit([traindf.userId.values, traindf.movieId.values], traindf.rating.values, epochs=100)"
++    "history = model.fit([traindf.userId.values, traindf.movieId.values], traindf.rating.values, epochs=70, batch_size = 512, callbacks=[WandbCallback()])"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 41,
++   "execution_count": 58,
+    "metadata": {},
+    "outputs": [
+     {
+      "data": {
+       "text/plain": [
+-       "[<matplotlib.lines.Line2D at 0x1a44fef9b0>]"
++       "[<matplotlib.lines.Line2D at 0x7fafccecdc18>]"
+       ]
+      },
+-     "execution_count": 41,
++     "execution_count": 58,
+      "metadata": {},
+      "output_type": "execute_result"
+     },
+     {
+      "data": {
+-      "image/png": "iVBORw0KGgoAAAANSUhEUgAAAXQAAAD8CAYAAABn919SAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADl0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uIDMuMC4yLCBodHRwOi8vbWF0cGxvdGxpYi5vcmcvOIA7rQAAHh5JREFUeJzt3XmQnHd95/H3t485NZpD07oljy5LFpLxMbLkC4OPxFewExawObOQqMIS4gRqXbBkK7tFKiG7FAkBCtAaYyBgB2wHDLETg218W/bY8qHL1mndmpFG0twz3T3f/aNb0liWPEf3zNP99OdV1dVPP88z/XyfeuyPnv72r5/H3B0RESl+kaALEBGR/FCgi4iEhAJdRCQkFOgiIiGhQBcRCQkFuohISCjQRURCQoEuIhISCnQRkZCIDbeCmd0J3Ai0uvuyU5Z9AfgakHD3Q8O9V2Njozc1NY2xVBGR0vTiiy8ecvfEcOsNG+jAXcC3gB8NnWlmc4DfA3aNtKimpiZaWlpGurqIiABm9uZI1hu25eLuTwDtp1n0j8DtgC4GIyJSAMbUQzezm4C97v5KnusREZExGknL5S3MrAr4H2TaLSNZfzWwGmDu3Lmj3ZyIiIzQWM7QFwDzgFfMbCcwG3jJzKafbmV3X+Puze7enEgM29MXEZExGvUZuru/Bkw9/job6s0jGeUiIiLjZ9gzdDO7G3gWWGxme8zs0+NfloiIjNawZ+jufuswy5vyVo2IiIzZqFsuQXhk00HeONjFwqmTWDh1EnMbqohGLOiyREQKSlEE+uNvtPGjZ0+Oq0/UlPN/PnAu71sy9R3+SkSktNhE3iS6ubnZx/pL0Y6+JFtbu9h6sIs7n97B5gOd/PElTXzxuiVUxKN5rlREpHCY2Yvu3jzcekVxhg4wuSLOBXPruWBuPe8/byZffWgzdz2zk+d3tPPzP7uY6vKi2RURkXFRlFdbrIhH+V/vfxff+/iFbNzfwdcefj3okkREAleUgX7c779rOh9fdRZ3PbOTdbuOBF2OiEigijrQAW6/djHTair40v2vkUwPBl2OiEhgij7QayrifOXmZWw+0MmaJ7YHXY6ISGCKPtABrlk6jRuWz+Abj2xh/7HeoMsREQlEKAId4IvXLSGVHuQnz434fhsiIqESmkCf01DFlUumcffzu+hPpYMuR0RkwoUm0AE+eclZHO4e4MHX9gddiojIhAtVoF+6oJH5iWp++MyIbr8nIhIqoQr0SMT4xKqzeHn3UV7dczTockREJlSoAh3gAxfOpros+paLeYmIlILQBXpNRZw/vGAWD7yyj/bugaDLERGZMKELdIBbL5rLQGqQh9bry1ERKR2hDPSlMyYzr7Gah147EHQpIiITJpSBbmZcv3w6z24/rLaLiJSMUAY6wHXLZpAedB7eoLN0ESkNwwa6md1pZq1mtn7IvP9rZpvN7FUz+zczqxvfMkfvXTMnM7ehigfXK9BFpDSM5Az9LuDaU+b9Bljm7ucCbwBfynNdOcu0XWbwzNZDHO1R20VEwm/YQHf3J4D2U+Y97O6p7MvngNnjUFvOrl8+ndSg8/DGg0GXIiIy7vLRQ/8U8FAe3ifvls+qZXZ9JQ/p2i4iUgJyCnQz+zKQAn7yDuusNrMWM2tpa2vLZXOjdrzt8tTWQxzrTU7otkVEJtqYA93M/hi4Efiou/uZ1nP3Ne7e7O7NiURirJsbs2uXTSeZdn73euuEb1tEZCKNKdDN7FrgduD97t6T35Ly67zZdTRUl/H4GxP76UBEZKKNZNji3cCzwGIz22Nmnwa+BdQAvzGzl83su+Nc55hFIsZlCxt54o1DDA6e8YOEiEjRiw23grvfeprZ3x+HWsbNFWcneOCVfWzc38GyWbVBlyMiMi5C+0vRoS4/uxFAbRcRCbWSCPSpNRW8a+ZkBbqIhFpJBDpk2i4vvXmEzj4NXxSRcCqZQH/P2QlSg84z2w4HXYqIyLgomUC/YG49k8pjaruISGiVTKCXxSJcsmAKj7/exjv8DkpEpGiVTKADXLE4wd6jvWxr6w66FBGRvCupQH/PosylB57coraLiIRPSQX6nIYqZtdX8tx2fTEqIuFTUoEOcPH8Kazd0a7LAIhI6JReoC+YwtGeJJsOdARdiohIXpVkoAM8q/HoIhIyJRfoM2oraZpSpT66iIROyQU6ZM7S1+5oJ60+uoiESEkG+qr5U+jsS7Fh37GgSxERyZuSDPSL52f66Gq7iEiYlGSgT51cwfxEtb4YFZFQKclAh8xZ+gs7j5BKDwZdiohIXpRuoC+YQld/itf2qo8uIuFQsoG+6kQfvT3gSkRE8qNkA71xUjnzE9W8sFOBLiLhMGygm9mdZtZqZuuHzGsws9+Y2Zbsc/34ljk+Vs5roGWnrusiIuEwkjP0u4BrT5n3ReARd18EPJJ9XXRWNDXQ0Zfi9YOdQZciIpKzYQPd3Z8ATu1L3AT8MDv9Q+DmPNc1IVY0NQCo7SIioTDWHvo0d9+fnT4ATDvTima22sxazKylra2wbiwxu76SGbUVPL9DgS4ixS/nL0U9c4POMzah3X2Nuze7e3Mikch1c3llZqxoauCFne26z6iIFL2xBvpBM5sBkH1uzV9JE2vFvAYOdvSzq70n6FJERHIy1kB/APhkdvqTwC/zU87EuyjbR1fbRUSK3UiGLd4NPAssNrM9ZvZp4KvANWa2Bbg6+7ooLZo6idrKuL4YFZGiFxtuBXe/9QyLrspzLYGIRI730Y8EXYqISE5K9peiQ100r54dh7pp7ewLuhQRkTFToHNyPHqLztJFpIgp0IFls2qpjEf1xaiIFDUFOhCPRjhvTh0vvqkzdBEpXgr0rBVN9WzYd4yu/lTQpYiIjIkCPau5qYFBh5d3HQ26FBGRMVGgZ50/t46IQcub6qOLSHFSoGfVVMRZMn2yRrqISNFSoA+xoqmel3bpxtEiUpwU6EM0NzXQM5Bm037d8EJEio8CfYjmpsyd9HRdFxEpRgr0IWbUVjK7vlLj0UWkKCnQT6EbXohIsVKgn+LCs+pp7exnd3tv0KWIiIyKAv0UunG0iBQrBfopFk2dxOSKmAJdRIqOAv0UkYjRnO2ji4gUEwX6aaxoamBbWzeHu/qDLkVEZMQU6Kdx0bzMePQWDV8UkSKiQD+NZbNqKYtFeEE3vBCRIpJToJvZX5nZBjNbb2Z3m1lFvgoLUnksynlz6tRHF5GiMuZAN7NZwF8Aze6+DIgCt+SrsKBd1NTA+n0ddOuGFyJSJHJtucSASjOLAVXAvtxLKgzNTfWkB52Xd+uGFyJSHMYc6O6+F/gasAvYDxxz94fzVVjQLjyrnoihG0eLSNHIpeVSD9wEzANmAtVm9rHTrLfazFrMrKWtrW3slU6wmoo458yYrD66iBSNXFouVwM73L3N3ZPA/cAlp67k7mvcvdndmxOJRA6bm3grmhpYt+soSd3wQkSKQC6BvgtYZWZVZmbAVcCm/JRVGFY0NdCbTLNhX0fQpYiIDCuXHvpa4F7gJeC17HutyVNdBWFF9gdGGo8uIsUgp1Eu7v437r7E3Ze5+8fdPVS/lZ9aU0HTlCrWKtBFpAjol6LDWDlvCi/sbGdwUDe8EJHCpkAfxqoFDRzrTbLpgProIlLYFOjDWDlvCgBrt6vtIiKFTYE+jJl1lcxtqOK57YeDLkVE5B0p0Edg1fwG1u5QH11ECpsCfQRWzZ/Csd4kmw90Bl2KiMgZKdBHYOX8bB99h9ouIlK4FOgjMKuukjkNleqji0hBU6CP0Kp5U9RHF5GCpkAfoVXzp3C0J8kbreqji0hhUqCP0Mr5DQA8t01tFxEpTAr0EZpdX8WchkqeVR9dRAqUAn0ULp4/hee2t5NWH11ECpACfRQuW5TgWG+S1/YeC7oUEZG3UaCPwqULMuPRn9pSPLfSE5HSoUAfhSmTynnXzMk8ueVQ0KWIiLyNAn2ULlvUyEu7jtDdnwq6FBGRt1Cgj9J7FiVIpl2XARCRgqNAH6ULz6qnPBZR20VECo4CfZQq4lEumtfAUwp0ESkwOQW6mdWZ2b1mttnMNpnZxfkqrJBdvqiRLa1dHDjWF3QpIiIn5HqG/g3gP9x9CfBuYFPuJRW+yxYmAHhqq87SRaRwjDnQzawWeA/wfQB3H3D3o/kqrJAtmV5D46QyjUcXkYKSyxn6PKAN+IGZrTOzO8ysOk91FbRIxLhsYSNPbjmkywCISMHIJdBjwAXAd9z9fKAb+OKpK5nZajNrMbOWtrbwnNFeec40DncP8PLukvhQIiJFIJdA3wPscfe12df3kgn4t3D3Ne7e7O7NiUQih80VlivOThCLGI9sOhh0KSIiQA6B7u4HgN1mtjg76ypgY16qKgK1lXFWNDXwyKbWoEsREQFyH+XyOeAnZvYqcB7wd7mXVDyuOmcqrx/sZHd7T9CliIjkFuju/nK2nXKuu9/s7kfyVVgxuOqcaQA8ulln6SISPP1SNAfzGquZn6jmt+qji0gBUKDn6OpzprF2eztduvqiiARMgZ6jq5ZMZSA9yJNvhGdIpogUJwV6ji48q57ayji/1WgXEQmYAj1HsWiE9y1O8Ojmg6TSg0GXIyIlTIGeB9cvn8GRniTPbNNNL0QkOAr0PLhicYKa8hi/emVf0KWISAlToOdBeSzKNe+axn9uOMBASm0XEQmGAj1P/uDcmXT0pXhSl9QVkYAo0PPk0oWN1FbG1XYRkcAo0POkLBbhumXT+c3Gg/Ql00GXIyIlSIGeRzeeO5PugTS/e11j0kVk4inQ82jV/AamVJfxq1f2B12KiJQgBXoexaIRrl8+g0c2H6SjLxl0OSJSYhToefbB5tn0JQf55cv6clREJpYCPc+Wz6rlnBmT+dcXdgVdioiUGAV6npkZt140h/V7O1i/91jQ5YhICVGgj4Ob3j2L8liEe3SWLiITSIE+Dmqr4tywfAa/XLePngHd+EJEJoYCfZx8eMUcOvtTPPjagaBLEZESoUAfJxfNa2B+YzX3PK+2i4hMjJwD3cyiZrbOzH6dj4LCwsy45aI5tLx5RF+OisiEyMcZ+m3Apjy8T+h8eMVcqsui3PHk9qBLEZESkFOgm9ls4AbgjvyUEy61lXFuuWguv3p1P/uO9gZdjoiEXK5n6P8E3A6c8a4OZrbazFrMrKWtrfSuFf5fL20C4AdP7wi2EBEJvTEHupndCLS6+4vvtJ67r3H3ZndvTiQSY91c0ZpdX8WN587g7ud36/ouIjKucjlDvxR4v5ntBO4BrjSzf8lLVSHzp5fPp6s/xd1rNeJFRMbPmAPd3b/k7rPdvQm4BXjU3T+Wt8pCZNmsWi5ZMIUfPL1T9xwVkXGjcegT5DPvXcCBjj7u1rh0ERkneQl0d/+du9+Yj/cKq8sWNrJyXgPffHSrLgcgIuNCZ+gTxMy4/dolHOrq5wdP7wy6HBEJIQX6BLrwrHquPmca3318G0d7BoIuR0RCRoE+wf777y+mqz/Fdx7fFnQpIhIyCvQJtnh6DTefN4u7nt6pX4+KSF4p0APw+WvOxgy+8uuNQZciIiGiQA/AnIYqPnflIh5af4DHXm8NuhwRCQkFekD+9PL5LEhU8ze/3EBfMh10OSISAgr0gJTFInzlpmXsau/h249tDbocEQkBBXqALlnYyM3nzeS7j29jy8HOoMsRkSKnQA/Yl29YSk1FnNvueZn+lFovIjJ2CvSAJWrK+YcPnMvG/R18/eE3gi5HRIqYAr0AXLN0Gh9ZOZc1T27nma2Hgi5HRIqUAr1A/PUN5zBvSjWf/9krHOnWZQFEZPQU6AWiqizGN245n/buAT539zpSaV03XURGR4FeQJbPruVvb17GU1sP8XcPbg66HBEpMrGgC5C3+tCKOWzc38GdT+/gnBk1fLB5TtAliUiR0Bl6AfrrG87h0oVT+PK/reeFne1BlyMiRUKBXoBi0Qjf/sgFzK6v5FN3vcCGfceCLklEioACvUDVVZXx4z9ZSU15jE98/3m2tXUFXZKIFDgFegGbVVfJv/zJSszgY3esZXd7T9AliUgBG3Ogm9kcM3vMzDaa2QYzuy2fhUnG/MQkfvSplXT3p/jQ955la6vO1EXk9HI5Q08BX3D3pcAq4LNmtjQ/ZclQS2dO5p7VF5NMOx/63rO8tkc9dRF5uzEHurvvd/eXstOdwCZgVr4Kk7daOnMyP/+zi6mMR7n1/z3H07pEgIicIi89dDNrAs4H1ubj/eT05jVWc99nLmFmXQWfuPN5fvzsTtw96LJEpEDkHOhmNgm4D/hLd+84zfLVZtZiZi1tbW25bq7kTa+t4L7PXMJ7z07wP3+5gS//Yj0DKV0mQERyDHQzi5MJ85+4+/2nW8fd17h7s7s3JxKJXDYnWTUVcdZ8opn/9t4F/HTtLj70vWfZdVgjYERKXS6jXAz4PrDJ3b+ev5JkJKIR4/Zrl/Dtj1zAtrYurv/nJ7n/pT1qwYiUsFzO0C8FPg5caWYvZx/X56kuGaEbzp3BQ7ddzjkzavj8z17hz3+6jrbO/qDLEpEA2ESe0TU3N3tLS8uEba+UpAed7z6+jW/8dguVZVG+fP05fLB5NpkPUiJSzMzsRXdvHm49/VI0JKIR47PvW8iDt13O4mk13H7fq3x4zXOs36sx6yKlQoEeMgunTuKe1av4+z9aztbWLv7gW0/xhZ+9woFjfUGXJiLjTC2XEOvoS/Ltx7byg6d2YgYfWTmXz1yxgKmTK4IuTURGYaQtFwV6Cdjd3sM3H93CfS/tJRYxbr1oLp++bB5zGqqCLk1ERkCBLm/z5uFuvvnoVn6xbi+D7ly3bAafumweF8yt05enIgVMgS5ntP9YLz985k1+uvZNOvpSLJlew0dXzuWm82cxuSIedHkicgoFugyruz/FL17ey0/X7mLDvg4q4hGuWTqdPzx/JpcvShCP6jtzkUKgQJdReXXPUX7Wspt/f3U/R3qS1FfF+b2l07l2+XQuXdBIWUzhLhIUBbqMyUBqkCfeaOOBV/bx6OZWuvpT1FTEeM+iBFcsTvDesxMaJSMywUYa6LGJKEaKR1kswtVLp3H10mn0JdM8vfUQD284yGOvt/Lvr+0HYMn0Gi5b2MilCxtpbqqnRn13kYKgM3QZEXdn0/5OfvdGK09vPcQLO48wkBokYpmbb6xoauDCs+o5b04ds+oqNWpGJI/UcpFx1ZdM07LzCM/vbOeFHe2s232EvmTmuuyJmnLOnVXLslm1LJ9Vy9KZk5lRW6GQFxkjtVxkXFXEo1y2qJHLFjUCkEwPsnl/Jy/vPsK6XUd5be8xHnu9lcHs+UJtZZwl02tYPL2GRdNqWDR1EgunTmJKdZmCXiRPFOiSF/FohOWza1k+u5aPX5yZ1zOQYuO+DjYd6GTT/g427e/g/pf20tWfOvF3kytizE9MYn5jNWdNqaapsYq5DVXMaahS2IuMkgJdxk1VWYzmpgaamxpOzHN3DnT08cbBLra1drH9UBfb27p5bvth7l+395S/jzK7vpJZdZXMrKtkVn0lM2ormFGbeZ42uYKKeHSid0ukYCnQZUKZWTaQK7ni7LfekrAvmWZ3ew9vHu5h95Eedrf3svtID/uO9rJu91GO9iTf9n51VXGm1VSQqClnak05icnlJCaVk6gpp3FS5jFlUhn1VWVEIzrbl3BToEvBqIhHM/31aTWnXd7dn+JARx8HjvWx72gvrZ39HDjWx8GOPlo7+9lxqJvWzj6S6bd/0R8xqKsqo6E685hSXUZ9dRkNVWXUVcWpzy6rq4pTV1VGfVWcyRVxIvpHQIqIAl2KRnV5jAWJSSxITDrjOu5OR2+Ktq5+DnX1c7hrgMPd/Rzq7Odw9wDt3QMc7h5ga2sXR3oyrwfPMNDLDCZXxKmrilNbmXlMrjw5fWJeRZzJlTEmV8SpqYgxuTLzXB5TO0gmlgJdQsXMqK2KU1sVZ+HUMwf/cYODTmdfKhPuPQMc60lypGeAIz1JjvUmOTZ0ujfJ3iO9J6ZTZ/qXIKssFsmEfUWMmooYkypi1JTHM88VMWrKM/Oqy2NMGvKoPuW5Ih7Rl8MyIgp0KWmRyMl/AJqoHvHfuTu9yTTHepN09Kbo6EtyrCdJZ3+Szr4UHb3Z574UnX2Z6c6+JK0d/XT1p+jqS9E1kGIkPwOJWObTSXVZjOryKNXlMarKolSXxagc+lwepaosRmU8SlVZlMqyzOuT01Eq45npynjmEdMF2EIlp0A3s2uBbwBR4A53/2peqhIpcGaWDcsYM2rH9h6Dg05PMp0J9/4kXf1puvtTdPWn6M4+uvrT9AwMmTeQpqc/RXd/moOdffQMZP6mZyBNz0Ca9DCfGk4VjxoV8ZNBXxGLUlEWpSIWobIsSnksQkU8Oz+emS6PRSiPRzPz4xHKYyefy2IRymORE8/lsez6sZPLy2IRfUE9TsYc6GYWBb4NXAPsAV4wswfcfWO+ihMJs0jETrRZIPcLnrk7A+lBevrT9CTT9A6cDPreZJregewjOeQ5O92XzDx6k2n6koP0JdMc6R7ITKeOL8/M708N5lxrNGKURSOUxyPEo5HMdDbs49Hjz3Zi2cl5J+fHonZi2fHX8agRi0SIxyLEI0Ysu34sklkeOz4vYkSz05l5b10nGsm8zjxnlkeHzI8YBdkGy+UM/SJgq7tvBzCze4CbAAW6SADMLHtGHKV+HLfj7vSnBjOPbMAfD/yBdJr+5OCJ5QPpzLKB1CADx+elTq43kB4kmT45P5k+vnyQZNrp6k+dmJ9M+4np1OBbp0f7ySQfTga8ETUjkp0+8Wwn/xGIRoy//6PlrBjym4zxkEugzwJ2D3m9B1iZWzkiUujMLNtuiUJlYVxpMz3oJ8I9lQ3/ZHqQVNpJDmaf04OkB53UYGZ5ZjqzfuY5syyVdtKeXT7kH4xk2hkcMj+zDiemB7Pvd2Kdwcy8tEN6cJCqsvEf9TTuX4qa2WpgNcDcuXPHe3MiUoIyZ8EaJprLV9x7gTlDXs/OznsLd1/j7s3u3pxIJE5dLCIieZJLoL8ALDKzeWZWBtwCPJCfskREZLTG3HJx95SZ/Tnwn2SGLd7p7hvyVpmIiIxKTj10d38QeDBPtYiISA70MzERkZBQoIuIhIQCXUQkJBToIiIhYT6Sy73la2NmbcCbY/zzRuBQHsspFqW436W4z1Ca+12K+wyj3++z3H3YH/JMaKDnwsxa3L056DomWinudynuM5TmfpfiPsP47bdaLiIiIaFAFxEJiWIK9DVBFxCQUtzvUtxnKM39LsV9hnHa76LpoYuIyDsrpjN0ERF5B0UR6GZ2rZm9bmZbzeyLQdczHsxsjpk9ZmYbzWyDmd2Wnd9gZr8xsy3Z5/G8GU0gzCxqZuvM7NfZ1/PMbG32eP9r9mqeoWJmdWZ2r5ltNrNNZnZx2I+1mf1V9r/t9WZ2t5lVhPFYm9mdZtZqZuuHzDvtsbWMf87u/6tmdkEu2y74QB9y79LrgKXArWa2NNiqxkUK+IK7LwVWAZ/N7ucXgUfcfRHwSPZ12NwGbBry+h+Af3T3hcAR4NOBVDW+vgH8h7svAd5NZv9De6zNbBbwF0Czuy8jc4XWWwjnsb4LuPaUeWc6ttcBi7KP1cB3ctlwwQc6Q+5d6u4DwPF7l4aKu+9395ey051k/gefRWZff5hd7YfAzcFUOD7MbDZwA3BH9rUBVwL3ZlcJ4z7XAu8Bvg/g7gPufpSQH2syV3etNLMYUAXsJ4TH2t2fANpPmX2mY3sT8CPPeA6oM7MZY912MQT66e5dOiugWiaEmTUB5wNrgWnuvj+76AAwLaCyxss/AbcDx28lPwU46u6p7OswHu95QBvwg2yr6Q4zqybEx9rd9wJfA3aRCfJjwIuE/1gfd6Zjm9d8K4ZALylmNgm4D/hLd+8YuswzQ5JCMyzJzG4EWt39xaBrmWAx4ALgO+5+PtDNKe2VEB7rejJno/OAmUA1b29LlITxPLbFEOgjundpGJhZnEyY/8Td78/OPnj8I1j2uTWo+sbBpcD7zWwnmVbalWR6y3XZj+UQzuO9B9jj7muzr+8lE/BhPtZXAzvcvc3dk8D9ZI5/2I/1cWc6tnnNt2II9JK4d2m2d/x9YJO7f33IogeAT2anPwn8cqJrGy/u/iV3n+3uTWSO66Pu/lHgMeC/ZFcL1T4DuPsBYLeZLc7OugrYSIiPNZlWyyozq8r+t358n0N9rIc407F9APhEdrTLKuDYkNbM6Ll7wT+A64E3gG3Al4OuZ5z28TIyH8NeBV7OPq4n01N+BNgC/BZoCLrWcdr/9wK/zk7PB54HtgI/B8qDrm8c9vc8oCV7vH8B1If9WAP/G9gMrAd+DJSH8VgDd5P5niBJ5tPYp890bAEjM4pvG/AamVFAY962fikqIhISxdByERGREVCgi4iEhAJdRCQkFOgiIiGhQBcRCQkFuohISCjQRURCQoEuIhIS/x+m3j0lWOYGNgAAAABJRU5ErkJggg==\n",
++      "image/png": "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\n",
+       "text/plain": [
+        "<Figure size 432x288 with 1 Axes>"
+       ]
+      },
+-     "metadata": {},
++     "metadata": {
++      "needs_background": "light"
++     },
+      "output_type": "display_data"
+     }
+    ],
+@@ -868,16 +734,16 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 44,
++   "execution_count": 59,
+    "metadata": {},
+    "outputs": [
+     {
+      "data": {
+       "text/plain": [
+-       "4.2566359948675405"
++       "1.9373840541191725"
+       ]
+      },
+-     "execution_count": 44,
++     "execution_count": 59,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -912,7 +778,7 @@
+    "name": "python",
+    "nbconvert_exporter": "python",
+    "pygments_lexer": "ipython3",
+-   "version": "3.6.8"
++   "version": "3.7.3"
+   }
+  },
+  "nbformat": 4,

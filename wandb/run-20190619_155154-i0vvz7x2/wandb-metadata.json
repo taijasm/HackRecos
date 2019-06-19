@@ -1,0 +1,26 @@
+{
+    "root": "/home/jovyan/HackRecos",
+    "git": {
+        "remote": "https://github.com/taijasm/HackRecos.git",
+        "commit": "5459697ecd8745815bf3dc3511413eb8c116d169"
+    },
+    "email": "taijasmalpani@gmail.com",
+    "startedAt": "2019-06-19T16:30:55.455256",
+    "host": "jupyter-taijasm",
+    "username": "jovyan",
+    "os": "Linux-4.14.119+-x86_64-with-debian-buster-sid",
+    "python": "3.7.3",
+    "gpu": "Tesla K80",
+    "gpu_count": 1,
+    "cpu_count": 2,
+    "program": "<python with no main file>",
+    "cuda": "10.1.168",
+    "args": [
+        "-f",
+        "/home/jovyan/.local/share/jupyter/runtime/kernel-b3e5366d-a824-46ce-8e6e-685161ac1084.json"
+    ],
+    "state": "running",
+    "heartbeatAt": "2019-06-19T16:35:49.850025",
+    "jobType": null,
+    "mode": "run"
+}

@@ -1,0 +1,164 @@
+{
+    "graph": {
+        "_type": "graph",
+        "format": "keras",
+        "nodes": [
+            {
+                "name": "movieId",
+                "id": "movieId",
+                "class_name": "InputLayer",
+                "output_shape": [
+                    null,
+                    1
+                ],
+                "num_parameters": 0
+            },
+            {
+                "name": "userId",
+                "id": "userId",
+                "class_name": "InputLayer",
+                "output_shape": [
+                    null,
+                    1
+                ],
+                "num_parameters": 0
+            },
+            {
+                "name": "movieEmbedding",
+                "id": "movieEmbedding",
+                "class_name": "Embedding",
+                "output_shape": [
+                    null,
+                    1,
+                    3
+                ],
+                "num_parameters": 39444
+            },
+            {
+                "name": "userEmbedding",
+                "id": "userEmbedding",
+                "class_name": "Embedding",
+                "output_shape": [
+                    null,
+                    1,
+                    3
+                ],
+                "num_parameters": 321045
+            },
+            {
+                "name": "dropout_9",
+                "id": "dropout_9",
+                "class_name": "Dropout",
+                "output_shape": [
+                    null,
+                    1,
+                    3
+                ],
+                "num_parameters": 0
+            },
+            {
+                "name": "dropout_10",
+                "id": "dropout_10",
+                "class_name": "Dropout",
+                "output_shape": [
+                    null,
+                    1,
+                    3
+                ],
+                "num_parameters": 0
+            },
+            {
+                "name": "movieFlatten",
+                "id": "movieFlatten",
+                "class_name": "Flatten",
+                "output_shape": [
+                    null,
+                    3
+                ],
+                "num_parameters": 0
+            },
+            {
+                "name": "userFlatten",
+                "id": "userFlatten",
+                "class_name": "Flatten",
+                "output_shape": [
+                    null,
+                    3
+                ],
+                "num_parameters": 0
+            },
+            {
+                "name": "MatrixFactorization",
+                "id": "MatrixFactorization",
+                "class_name": "Dot",
+                "output_shape": [
+                    null,
+                    1
+                ],
+                "num_parameters": 0
+            },
+            {
+                "name": "activation_2",
+                "id": "activation_2",
+                "class_name": "Activation",
+                "output_shape": [
+                    null,
+                    1
+                ],
+                "num_parameters": 0
+            },
+            {
+                "name": "lambda_1",
+                "id": "lambda_1",
+                "class_name": "Lambda",
+                "output_shape": [
+                    null,
+                    1
+                ],
+                "num_parameters": 0
+            }
+        ],
+        "edges": [
+            [
+                "movieId",
+                "movieEmbedding"
+            ],
+            [
+                "userId",
+                "userEmbedding"
+            ],
+            [
+                "movieEmbedding",
+                "dropout_9"
+            ],
+            [
+                "userEmbedding",
+                "dropout_10"
+            ],
+            [
+                "dropout_9",
+                "movieFlatten"
+            ],
+            [
+                "dropout_10",
+                "userFlatten"
+            ],
+            [
+                "movieFlatten",
+                "MatrixFactorization"
+            ],
+            [
+                "userFlatten",
+                "MatrixFactorization"
+            ],
+            [
+                "MatrixFactorization",
+                "activation_2"
+            ],
+            [
+                "activation_2",
+                "lambda_1"
+            ]
+        ]
+    }
+}
